@@ -1,0 +1,17 @@
+{
+    "name": "anibot",
+    "version": "1.0.0",
+    "description": "",
+    "main": "Anibot.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon Anibot.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "^14.7.1",
+        "dotenv": "^16.0.3"
+    }
+}
