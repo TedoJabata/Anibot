@@ -1,73 +1,33 @@
-const { Client, GatewayIntentBits, Constants, discordSort, ApplicationCommandOptionType } = require("discord.js");
-require('dotenv/config');
+const { Client, IntentsBitField, Partials } = require("discord.js");
+const WOK = require("wokcommands");
+const path = require("path");
+require("dotenv/config");
+const { execute } = require("./Music/play");
 
 const client = new Client({
     intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildVoiceStates,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers,
+        IntentsBitField.Flags.Guilds,
+        IntentsBitField.Flags.GuildMessages,
+        IntentsBitField.Flags.DirectMessages,
+        IntentsBitField.Flags.MessageContent,
+        IntentsBitField.Flags.GuildVoiceStates,
     ],
+    partials: [Partials.Channel],
+});
+
+const queue = new Map();
+
+client.on("ready", () => {
+    new WOK({
+        client,
+        commandsDir: path.join(__dirname, "commands"),
+        testServers: ['1004132716335333376'],
+    });
+});
+
+
+client.on('messageCreate', async message => {
+    execute(message)
 })
 
-client.on('ready', () => {
-    console.log('Logged In!');
-    const guildId = "1004132716335333376"
-    const guild = client.guilds.cache.get(guildId)
-    let commands
-
-    if (guild) {
-        commands = guild.commands
-    } else {
-        commands = client.application.commands
-    }
-
-    commands.create({
-        name: 'ping',
-        description: 'Replies with pong.'
-    })
-
-    commands.create({
-        name: 'add',
-        description: 'Adds 2 numbers',
-        options: [{
-            name: "number1",
-            description: 'The first number',
-            required: true,
-            type: ApplicationCommandOptionType.Number
-        }, {
-            name: "number2",
-            description: 'The second number',
-            required: true,
-            type: ApplicationCommandOptionType.Number
-        }]
-    })
-})
-
-client.on('interactionCreate', async(interaction) => {
-    if (!interaction.isCommand()) {
-        return
-    }
-
-    const { commandName, options } = interaction
-
-    if (commandName === 'ping') {
-        interaction.channel.send({
-            content: 'pong'
-        })
-    } else if (commandName === 'add') {
-        const num1 = options.getNumber('number1')
-        const num2 = options.getNumber('number2')
-
-        await interaction.channel.send({
-            content: `The result is: ${num1 + num2}`
-        })
-    }
-})
-
-client.on('messageCreate', (message) => {
-
-    const args = message.toString().split(' ');
-})
 client.login(process.env.TOKEN);
