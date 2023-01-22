@@ -2,7 +2,7 @@ const { Client, IntentsBitField, Partials } = require("discord.js");
 const WOK = require("wokcommands");
 const path = require("path");
 require("dotenv/config");
-const { execute } = require("./Music/play");
+const { Play } = require("./Music/play");
 
 const client = new Client({
     intents: [
@@ -27,7 +27,7 @@ client.on("ready", () => {
 
 
 client.on('messageCreate', async message => {
-    execute(message)
+    Play(message)
 })
 
 client.login(process.env.TOKEN);
