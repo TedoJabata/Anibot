@@ -11,7 +11,6 @@ module.exports = {
     options: [{
         name: 'arg',
         description: 'link or keyword',
-        type: ApplicationCommandOptionType.String,
         required: true,
     }],
     callback: ({ interaction, arg }) => {
