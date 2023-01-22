@@ -1,15 +1,12 @@
-const { CommandType } = require("wokcommands");
-
 module.exports = {
-    description: "Ping pong command",
-    type: CommandType.SLASH,
+    category: 'fun',
+    description: 'Ping Pong command',
 
     slash: true,
     testOnly: true,
-
-    callback: ({}) => {
-        return {
-            content: "Pong!",
+    callback: ({ interaction }) => {
+        if (interaction) {
+            interaction.reply("***Pong!***")
         }
     },
 }

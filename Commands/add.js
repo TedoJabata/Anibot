@@ -1,18 +1,29 @@
-const { CommandType } = require("wokcommands");
-
 module.exports = {
-    description: "Adds numbers together",
-    type: CommandType.SLASH,
+    category: 'math',
+    description: 'Adds two numbers',
 
-    minArgs: 2,
-    maxArgs: 2,
-    expectedArgs: "<num1> <num2>",
+    slash: true,
+    testOnly: true,
 
-    callback: ({ args }) => {
-        const sum = args.reduce((acc, cur) => {
-            return acc + Number(cur)
-        }, 0)
+    options: [{
+            name: 'num1',
+            description: 'The first number.',
+            required: true,
+        },
+        {
+            name: 'num2',
+            description: 'The second number.',
+            required: true,
+        },
+    ],
+    callback: ({ interaction, args }) => {
+        const num1 = parseInt(args[0])
+        const num2 = parseInt(args[1])
 
-        return `The sum is ${sum}`
+        if (interaction) {
+            interaction.reply({
+                content: `The result is: ***${String(num1 + num2)}***`
+            })
+        }
     },
 }
