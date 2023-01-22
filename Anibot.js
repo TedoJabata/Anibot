@@ -1,8 +1,8 @@
 const { Client, IntentsBitField, Partials } = require("discord.js");
 const WOK = require("wokcommands");
 const path = require("path");
-require("dotenv/config");
 const { Play } = require("./Music/play");
+require("dotenv/config");
 
 const client = new Client({
     intents: [

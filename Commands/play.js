@@ -1,4 +1,3 @@
-const { ApplicationCommandOptionType } = require("discord.js")
 const { Play } = require("../Music/play")
 
 module.exports = {
