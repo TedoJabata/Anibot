@@ -1,4 +1,4 @@
-const { Play } = require("../Music/play")
+const { Play } = require("../Prefix/Music/play")
 
 module.exports = {
     category: 'music',
