@@ -1,8 +1,8 @@
 const { Info } = require("../Prefix/info")
 
 module.exports = {
-    category: 'fun',
-    description: 'Ping Pong command',
+    category: 'info',
+    description: 'Command for infformation',
 
     slash: true,
     testOnly: true,
