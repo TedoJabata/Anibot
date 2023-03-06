@@ -1,12 +1,19 @@
 module.exports = {
-    category: 'fun',
-    description: 'Ping Pong command',
+        name: 'ping',
+        description: 'Ping Pong command',
+        async execute(interaction, player) {
 
-    slash: true,
-    testOnly: true,
-    callback: ({ interaction }) => {
-        if (interaction) {
             interaction.reply("***Pong!***")
+
         }
-    },
-}
+    }
+    /*category: 'fun',
+        description: 'Ping Pong command',
+
+        slash: true,
+        testOnly: true,
+        callback: ({ interaction }) => {
+            if (interaction) {
+                interaction.reply("***Pong!***")
+            }
+        },*/
