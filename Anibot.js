@@ -41,7 +41,9 @@ client.emotes = config.emoji
 fs.readdir('./Commands/Music', (err, files) => {
     if (err) return console.log('Could not find any commands!')
     const jsFiles = files.filter(f => f.split('.').pop() === 'js')
+
     if (jsFiles.length <= 0) return console.log('Could not find any commands!')
+
     jsFiles.forEach(file => {
         const cmd = require(`./Commands/Music/${file}`)
         console.log(`Loaded ${file}`)
@@ -62,7 +64,9 @@ client.on('ready', () => {
 client.on('messageCreate', async message => {
     if (message.author.bot || !message.guild) return
     const prefix = 'ani'
+
     if (!message.content.startsWith(prefix)) return
+
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
 
