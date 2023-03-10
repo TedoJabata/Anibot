@@ -1,5 +1,4 @@
 module.exports = {
-    category: 'math',
     description: 'Adds two numbers',
 
     slash: true,

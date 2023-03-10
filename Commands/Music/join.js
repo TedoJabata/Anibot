@@ -1,5 +1,3 @@
-const { Constants } = require('discord.js')
-
 module.exports = {
     name: 'join',
     aliases: ['move'],
