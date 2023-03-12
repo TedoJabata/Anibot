@@ -3,7 +3,7 @@ require("../../global")
 const { UserExists, CreateUser, CreatePokemon } = require("../../Controllers/dbController")
 
 module.exports = {
-    name: 'get',
+    name: 'catch',
     run: async(client, message) => {
         if (typeof pokename == 'undefined' || pokename == '') {
             message.channel.send(`No pokemons around to be catched!`);
