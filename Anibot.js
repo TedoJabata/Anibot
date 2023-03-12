@@ -1,4 +1,8 @@
+const UserSchema = require("./Models/User")
+const PokemonSchema = require("./Models/Pokemon")
+
 const { DisTube } = require('distube')
+const mongoose = require("mongoose");
 const WOK = require("wokcommands");
 const path = require("path");
 const Discord = require('discord.js')
@@ -15,8 +19,6 @@ const config = require('./config.json')
 const { SpotifyPlugin } = require('@distube/spotify')
 const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp');
-const { Add } = require('./Commands/Math/add');
-const { Ping } = require('./Commands/Fun/ping');
 require("dotenv/config");
 require("discord-player/smoothVolume");
 
@@ -38,6 +40,24 @@ client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
 client.emotes = config.emoji
 
+mongoose.connect(process.env.MONGO, { useNewUrlParser: true });
+
+const db = mongoose.connection
+db.once("open", function() {
+    console.log("Connected successfully")
+});
+
+
+/*const Pokemon = mongoose.model('Pokemon', PokemonSchema, "pokemons");
+const pokemon = new Pokemon({ name: "TestPokejan", ownerId: 1 })
+pokemon.save()
+
+const User = mongoose.model('User', UserSchema, "users");
+const user = new User({ discordId: 1, discordName: "Test", pokemons: [pokemon.id] })
+user.save()*/
+
+
+
 ReadCommands('./Commands/Music')
 ReadCommands('./Commands/Fun')
 ReadCommands('./Commands/Math')
@@ -55,7 +75,6 @@ async function ReadCommands(path) {
         })
     })
 }
-
 
 client.on('ready', () => {
     new WOK({
@@ -82,7 +101,8 @@ client.on('messageCreate', async message => {
     try {
         cmd.run(client, message, args)
     } catch (error) {
-        console.log(error)
+        console.log("Invalid command")
+        message.channel.send("Invalid command")
     }
 })
 

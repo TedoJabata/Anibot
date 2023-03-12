@@ -24,6 +24,7 @@
         "fluent-ffmpeg": "^2.1.2",
         "formidable": "^2.1.1",
         "libsodium-wrappers": "^0.7.10",
+        "mongoose": "^7.0.1",
         "node": "^18.12.1",
         "node-abort-controller": "^3.0.1",
         "play-dl": "^1.9.6",
