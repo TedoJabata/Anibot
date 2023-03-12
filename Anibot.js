@@ -1,6 +1,3 @@
-const UserSchema = require("./Models/User")
-const PokemonSchema = require("./Models/Pokemon")
-
 const { DisTube } = require('distube')
 const mongoose = require("mongoose");
 const WOK = require("wokcommands");
@@ -48,13 +45,7 @@ db.once("open", function() {
 });
 
 
-/*const Pokemon = mongoose.model('Pokemon', PokemonSchema, "pokemons");
-const pokemon = new Pokemon({ name: "TestPokejan", ownerId: 1 })
-pokemon.save()
 
-const User = mongoose.model('User', UserSchema, "users");
-const user = new User({ discordId: 1, discordName: "Test", pokemons: [pokemon.id] })
-user.save()*/
 
 
 

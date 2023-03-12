@@ -12,7 +12,6 @@ module.exports = {
                     const fixedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1)
                     const attack = Math.floor(Math.random() * 101)
                     message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`)
-                    console.log(data.results[index].name)
                     pokename = fixedName
                     pokeattack = attack
                 });
