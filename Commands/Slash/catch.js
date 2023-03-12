@@ -9,16 +9,16 @@ const client = new Discord.Client({
 })
 
 module.exports = {
-    description: 'Spawns a pokemon',
+    description: 'Catches a pokemon',
 
     slash: true,
     testOnly: true,
 
     callback: ({ interaction }) => {
         client.commands = new Discord.Collection()
-        let cmd = require(`../Fun/spawn`)
-        client.commands.set('spawn', cmd)
-        cmd = client.commands.get('spawn')
+        let cmd = require(`../Fun/catch`)
+        client.commands.set('catch', cmd)
+        cmd = client.commands.get('catch')
         cmd.run(client, '', '', true, interaction)
     }
 }

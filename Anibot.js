@@ -64,7 +64,7 @@ async function ReadCommands(path) {
 client.on('ready', () => {
     new WOK({
         client,
-        commandsDir: path.join(__dirname, "Commands/Slash"),
+        commandsDir: path.join(__dirname, "./Commands/Slash"),
         testServers: ['1004132716335333376'],
     });
     console.log('The bot is ready.')
@@ -84,7 +84,7 @@ client.on('messageCreate', async message => {
         return message.channel.send(`${client.emotes.error} | You must be in a voice channel!`)
     }
     try {
-        cmd.run(client, message, args)
+        cmd.run(client, message, args, false)
     } catch (error) {
         console.log("Invalid command")
         message.channel.send("Invalid command")
