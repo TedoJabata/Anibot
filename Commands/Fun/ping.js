@@ -1,5 +1,6 @@
 module.exports = {
-    async Ping(message) {
-        message.channel.send('***Pong!***')
+    name: 'ping',
+    run: async(client, message) => {
+        return message.channel.send(`***Pong!***`)
     }
 }

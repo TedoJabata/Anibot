@@ -1,11 +1,12 @@
 module.exports = {
-    async Add(message, args) {
+    name: 'add',
+    run: async(client, message, args) => {
         let sum = 0;
 
         args.forEach(element => {
             sum += Number(element);
             console.log(sum)
         });
-        message.channel.send(`<@${message.author.id}> The sum is ***${String(sum)}***`)
+        return message.channel.send(`<@${message.author.id}> The sum is ***${String(sum)}***`)
     }
 }
