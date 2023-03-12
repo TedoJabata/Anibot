@@ -1,17 +1,26 @@
 require("../../global")
 
-const { UserExists } = require("../../Controllers/dbController")
+const { UserExists, CreateUser, CreatePokemon } = require("../../Controllers/dbController")
 
 module.exports = {
     name: 'get',
     run: async(client, message) => {
-        if (pokename === null || pokename == '') return;
+        if (typeof pokename == 'undefined' || pokename == '') {
+            message.channel.send(`No pokemons around to be catched!`);
+            return;
+        }
 
-        message.channel.send(`<@${message.author.id}> You got ***${pokename}*** with ***${pokeattack}*** power!`)
+        let userExists = await UserExists(message.author.id)
+
+        if (!userExists) {
+            await CreateUser(message.author.id, message.author.username)
+        }
+
+        await CreatePokemon(pokename, pokeattack, message.author.id)
+
+        await message.channel.send(`<@${message.author.id}> you got ***${pokename}*** with ***${pokeattack}*** power!`)
 
         pokename = ''
         pokeattack = 0
-
-        UserExists(message.author.id)
     }
 }

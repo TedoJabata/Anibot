@@ -41,13 +41,8 @@ mongoose.connect(process.env.MONGO, { useNewUrlParser: true });
 
 const db = mongoose.connection
 db.once("open", function() {
-    console.log("Connected successfully")
+    console.log("Database connected")
 });
-
-
-
-
-
 
 ReadCommands('./Commands/Music')
 ReadCommands('./Commands/Fun')
@@ -60,7 +55,6 @@ async function ReadCommands(path) {
 
         jsFiles.forEach(file => {
             const cmd = require(`${path}/${file}`)
-            console.log(`Loaded ${file}`)
             client.commands.set(cmd.name, cmd)
             if (cmd.aliases) cmd.aliases.forEach(alias => client.aliases.set(alias, cmd.name))
         })

@@ -1,18 +1,30 @@
-const mongoose = require("mongoose");
-const UserSchema = require("./Models/User")
-const PokemonSchema = require("./Models/Pokemon")
+const UserSchema = require("../Models/User")
+const PokemonSchema = require("../Models/Pokemon")
 
-function UserExists(userId) {
-    mongoose.model("users", UserSchema, "test")
-    console.log(userId)
+async function UserExists(userId) {
+    let foundUser = await UserSchema.findOne({ discordId: userId })
+    if (foundUser == null) {
+        return false
+    }
+    return true
 }
 
-/*const Pokemon = mongoose.model('Pokemon', PokemonSchema, "pokemons");
-const pokemon = new Pokemon({ name: "TestPokejan", ownerId: 1 })
-pokemon.save()
+async function CreateUser(userId, username) {
+    const user = new UserSchema({ discordId: userId, discordName: username, pokemons: [] })
+    user.save()
+}
 
-const User = mongoose.model('User', UserSchema, "users");
-const user = new User({ discordId: 1, discordName: "Test", pokemons: [pokemon.id] })
-user.save()*/
+async function CreatePokemon(name, attack, userId) {
 
-module.exports = { UserExists }
+    const pokemon = new PokemonSchema({ name: name, attack: attack, ownerId: userId })
+    pokemon.save()
+    await AddPokemonToUser(pokemon.id, userId)
+}
+
+async function AddPokemonToUser(pokemonId, userId) {
+    let foundUser = await UserSchema.findOne({ discordId: userId })
+    foundUser.pokemons.push(pokemonId)
+    foundUser.save()
+}
+
+module.exports = { UserExists, CreateUser, CreatePokemon }
