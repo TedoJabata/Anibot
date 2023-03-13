@@ -39,8 +39,11 @@ module.exports = {
             option.setName('number2')
             .setDescription('The second number')),
     async execute(interaction) {
-        const num1 = interaction.option.getNumber('number1')
-        const num2 = interaction.option.getNumber('number2')
+        const { options } = interaction;
+        const num1 = options.getNumber('number1')
+        const num2 = options.getNumber('number2')
+        console.log(num1)
+        console.log(num2)
         await interaction.reply(`The result is: ***${String(num1 + num2)}***`);
     },
 }
