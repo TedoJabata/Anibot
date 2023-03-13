@@ -1,6 +1,6 @@
 module.exports = {
     name: 'add',
-    run: async(client, message, args) => {
+    execute: async(message, args, client) => {
         let sum = 0;
 
         args.forEach(element => {

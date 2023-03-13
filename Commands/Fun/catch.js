@@ -4,7 +4,7 @@ const { UserExists, CreateUser, CreatePokemon } = require("../../Controllers/dbC
 
 module.exports = {
     name: 'catch',
-    run: async(client, message, args, isInteraction, interaction) => {
+    execute: async(message, args, client, isInteraction, interaction) => {
         if (typeof pokename == 'undefined' || pokename == '') {
             if (isInteraction) {
                 interaction.reply(`No pokemons around to be catched!`)

@@ -1,13 +1,10 @@
-const { CommandType } = require("wokcommands");
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-    description: "Info command",
-
-    type: CommandType.SLASH,
-
-    callback: () => {
-        return {
-            content: "Insert info here",
-        }
+    data: new SlashCommandBuilder()
+        .setName('info')
+        .setDescription('Gives info'),
+    async execute(interaction) {
+        await interaction.reply('insert info here');
     },
-}
+};

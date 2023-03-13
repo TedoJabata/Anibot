@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const WOK = require("wokcommands");
 const path = require("path");
 const Discord = require('discord.js')
+const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const client = new Discord.Client({
     intents: [
         Discord.GatewayIntentBits.Guilds,
@@ -35,6 +36,7 @@ client.distube = new DisTube(client, {
 })
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
+client.slashCommands = new Discord.Collection();
 client.emotes = config.emoji
 
 mongoose.connect(process.env.MONGO, { useNewUrlParser: true });
@@ -44,35 +46,41 @@ db.once("open", function() {
     console.log("Database connected")
 });
 
-ReadCommands('./Commands/Music')
-ReadCommands('./Commands/Fun')
-ReadCommands('./Commands/Math')
-
 async function ReadCommands(path) {
-    fs.readdir(path, (err, files) => {
-        if (err) { console.log(err); return }
-        const jsFiles = files.filter(f => f.split('.').pop() === 'js')
+    const commandFiles = fs.readdirSync(path).filter(file => file.endsWith('.js'));
 
-        jsFiles.forEach(file => {
-            const cmd = require(`${path}/${file}`)
-            client.commands.set(cmd.name, cmd)
-            if (cmd.aliases) cmd.aliases.forEach(alias => client.aliases.set(alias, cmd.name))
-        })
-    })
+    for (const file of commandFiles) { //*
+        const command = require(`${path}/${file}`); //*
+        console.log(command)
+        client.commands.set(command.name, command); //*
+    }
+}
+
+async function ReadSlashCommands(path) {
+    const slashCommandFiles = fs.readdirSync(path).filter(file => file.endsWith('.js'));
+
+    for (const file of slashCommandFiles) {
+        const slashCommand = require(`${path}/${file}`);
+        client.slashCommands.set(slashCommand.data.name, slashCommand);
+    }
 }
 
 client.on('ready', () => {
-    new WOK({
-        client,
-        commandsDir: path.join(__dirname, "./Commands/Slash"),
-        testServers: ['1004132716335333376'],
-    });
+    // new WOK({
+    //     client,
+    //     commandsDir: path.join(__dirname, "./Commands/Slash"),
+    //     testServers: ['1004132716335333376'],
+    // });
+    ReadCommands('./Commands/Music')
+    ReadCommands('./Commands/Fun')
+    ReadCommands('./Commands/Math')
+    ReadSlashCommands('./Commands/Slash')
     console.log('The bot is ready.')
 })
 
-client.on('messageCreate', async message => {
+client.on(Events.MessageCreate, async message => {
     if (message.author.bot || !message.guild) return
-    const prefix = 'ani'
+    const prefix = config.prefix
 
     if (!message.content.startsWith(prefix)) return
 
@@ -84,12 +92,35 @@ client.on('messageCreate', async message => {
         return message.channel.send(`${client.emotes.error} | You must be in a voice channel!`)
     }
     try {
-        cmd.run(client, message, args, false)
+        cmd.execute(message, args, client)
     } catch (error) {
+        console.log(error)
         console.log("Invalid command")
         message.channel.send("Invalid command")
     }
 })
+
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isChatInputCommand()) return;
+
+    const command = interaction.client.slashCommands.get(interaction.commandName);
+
+    if (!command) {
+        console.error(`No command matching ${interaction.commandName} was found.`);
+        return;
+    }
+
+    try {
+        await command.execute(interaction, client, client.commands);
+    } catch (error) {
+        console.error(error);
+        if (interaction.replied || interaction.deferred) {
+            await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+        } else {
+            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+        }
+    }
+});
 
 client.distube
     .on('playSong', (queue, song) =>

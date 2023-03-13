@@ -16,7 +16,7 @@ module.exports = {
 
     callback: ({ interaction }) => {
         client.commands = new Discord.Collection()
-        let cmd = require(`../Fun/catch`)
+        let cmd = require(`./Fun/catch`)
         client.commands.set('catch', cmd)
         cmd = client.commands.get('catch')
         cmd.run(client, '', '', true, interaction)
