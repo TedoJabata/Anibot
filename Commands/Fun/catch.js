@@ -21,7 +21,6 @@ module.exports = {
             userExists = await UserExists(message.author.id)
         }
 
-
         if (!userExists) {
             if (isInteraction) {
                 await CreateUser(interaction.user.id, interaction.user.name)
