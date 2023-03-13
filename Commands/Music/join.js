@@ -1,7 +1,7 @@
 module.exports = {
     name: 'join',
     aliases: ['move'],
-    run: async(client, message) => {
+    execute: async(message, args, client) => {
         let voiceChannel = message.member.voice.channel
         if (!voiceChannel) {
             return message.channel.send(

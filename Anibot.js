@@ -1,9 +1,10 @@
 const { DisTube } = require('distube')
 const mongoose = require("mongoose");
-const WOK = require("wokcommands");
-const path = require("path");
+const { InteractionHandler } = require("./Handlers/InteractionHandler")
+const { MessageHandler } = require("./Handlers/MessageHandler")
+const { ReadCommands, ReadSlashCommands } = require("./CommandsReader")
 const Discord = require('discord.js')
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Events } = require('discord.js');
 const client = new Discord.Client({
     intents: [
         Discord.GatewayIntentBits.Guilds,
@@ -12,7 +13,6 @@ const client = new Discord.Client({
         Discord.GatewayIntentBits.MessageContent
     ]
 })
-const fs = require('fs')
 const config = require('./config.json')
 const { SpotifyPlugin } = require('@distube/spotify')
 const { SoundCloudPlugin } = require('@distube/soundcloud')
@@ -46,81 +46,23 @@ db.once("open", function() {
     console.log("Database connected")
 });
 
-async function ReadCommands(path) {
-    const commandFiles = fs.readdirSync(path).filter(file => file.endsWith('.js'));
-
-    for (const file of commandFiles) { //*
-        const command = require(`${path}/${file}`); //*
-        console.log(command)
-        client.commands.set(command.name, command); //*
-    }
-}
-
-async function ReadSlashCommands(path) {
-    const slashCommandFiles = fs.readdirSync(path).filter(file => file.endsWith('.js'));
-
-    for (const file of slashCommandFiles) {
-        const slashCommand = require(`${path}/${file}`);
-        client.slashCommands.set(slashCommand.data.name, slashCommand);
-    }
-}
-
-client.on('ready', () => {
-    // new WOK({
-    //     client,
-    //     commandsDir: path.join(__dirname, "./Commands/Slash"),
-    //     testServers: ['1004132716335333376'],
-    // });
-    ReadCommands('./Commands/Music')
-    ReadCommands('./Commands/Fun')
-    ReadCommands('./Commands/Math')
-    ReadSlashCommands('./Commands/Slash')
+client.on(Events.ClientReady, () => {
+    ReadCommands('Music', client)
+    ReadCommands('Fun', client)
+    ReadCommands('Math', client)
+    ReadSlashCommands('Fun', client)
+    ReadSlashCommands('Math', client)
     console.log('The bot is ready.')
 })
 
 client.on(Events.MessageCreate, async message => {
-    if (message.author.bot || !message.guild) return
-    const prefix = config.prefix
-
-    if (!message.content.startsWith(prefix)) return
-
-    const args = message.content.slice(prefix.length).trim().split(/ +/g)
-    const command = args.shift().toLowerCase()
-    const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command))
-    if (!cmd) return
-    if (cmd.inVoiceChannel && !message.member.voice.channel) {
-        return message.channel.send(`${client.emotes.error} | You must be in a voice channel!`)
-    }
-    try {
-        cmd.execute(message, args, client)
-    } catch (error) {
-        console.log(error)
-        console.log("Invalid command")
-        message.channel.send("Invalid command")
-    }
+    MessageHandler(message, client)
 })
 
 client.on(Events.InteractionCreate, async interaction => {
-    if (!interaction.isChatInputCommand()) return;
-
-    const command = interaction.client.slashCommands.get(interaction.commandName);
-
-    if (!command) {
-        console.error(`No command matching ${interaction.commandName} was found.`);
-        return;
-    }
-
-    try {
-        await command.execute(interaction, client, client.commands);
-    } catch (error) {
-        console.error(error);
-        if (interaction.replied || interaction.deferred) {
-            await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
-        } else {
-            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-        }
-    }
+    InteractionHandler(interaction, client)
 });
+
 
 client.distube
     .on('playSong', (queue, song) =>

@@ -1,4 +1,8 @@
 {
+    "spotify": {
+        "clientID": "f03df470fb9f483aba16cca29b543710",
+        "clientSecret": "66ac93a3c4454f4195bb2c25d5d47a02"
+    },
     "prefix": "ani",
     "emoji": {
         "play": "▶️",
