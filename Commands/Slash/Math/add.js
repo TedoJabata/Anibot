@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('add')
-        .setDescription('Adds 2 numbers together')
+        .setDescription('Adds 2 numbers together.')
         .addNumberOption(option =>
             option.setName('number1')
             .setDescription('The first number'))

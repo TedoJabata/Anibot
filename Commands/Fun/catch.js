@@ -7,9 +7,9 @@ module.exports = {
     execute: async(message, args, client, isInteraction, interaction) => {
         if (typeof pokename == 'undefined' || pokename == '') {
             if (isInteraction) {
-                interaction.reply(`No pokemons around to be catched!`)
+                await interaction.reply(`No pokemons around to be catched!`)
             } else {
-                message.channel.send(`No pokemons around to be catched!`);
+                await message.channel.send(`No pokemons around to be catched!`);
             }
             return;
         }
@@ -30,13 +30,13 @@ module.exports = {
         }
 
         if (isInteraction) {
-            await CreatePokemon(pokename, pokeattack, interaction.user.id)
+            await CreatePokemon(pokename, pokeattack, interaction.user.id, interaction.user.name)
         } else {
-            await CreatePokemon(pokename, pokeattack, message.author.id)
+            await CreatePokemon(pokename, pokeattack, message.author.id, message.author.name)
         }
 
         if (isInteraction) {
-            await interaction.reply(`<@${interaction.user.id}> you got ***${pokename}*** with ***${pokeattack}*** power!`)
+            await interaction.reply(`You got ***${pokename}*** with ***${pokeattack}*** power!`)
         } else {
             await message.channel.send(`<@${message.author.id}> you got ***${pokename}*** with ***${pokeattack}*** power!`)
         }

@@ -1,12 +1,10 @@
 require("../../global")
-const { Attachment } = require('discord.js');
-const Scraper = require('images-scraper');
 module.exports = {
     name: 'spawn',
     execute: async(message, args, client, isInteraction, interaction) => {
         fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
             .then((response) => response.json())
-            .then((data) => {
+            .then(async(data) => {
                 let index = Math.floor(Math.random() * data.count);
                 const pokemonName = data.results[index].name;
                 let fixedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
@@ -14,9 +12,9 @@ module.exports = {
                 const attack = Math.floor(Math.random() * 101);
 
                 if (isInteraction) {
-                    interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`)
+                    await interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`)
                 } else {
-                    message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`);
+                    await message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`);
                 }
 
                 pokename = fixedName;

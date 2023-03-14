@@ -50,8 +50,10 @@ client.on(Events.ClientReady, () => {
     ReadCommands('Music', client)
     ReadCommands('Fun', client)
     ReadCommands('Math', client)
+    ReadCommands('Moderation', client)
     ReadSlashCommands('Fun', client)
     ReadSlashCommands('Math', client)
+    ReadSlashCommands('Moderation', client)
     console.log('The bot is ready.')
 })
 
