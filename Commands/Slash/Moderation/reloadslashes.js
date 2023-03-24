@@ -6,9 +6,7 @@ module.exports = {
         .setName('reloadslashes')
         .setDescription('Reloads all slash commands.'),
     async execute(interaction) {
-        RegisterSlashCommands('Fun')
-        RegisterSlashCommands('Math')
-        RegisterSlashCommands('Moderation')
+        RegisterSlashCommands(['Fun', 'Math', 'Moderation'])
         await interaction.reply(`Reloaded all slash commands!`);
     },
 };

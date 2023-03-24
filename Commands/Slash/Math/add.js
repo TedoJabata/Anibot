@@ -6,10 +6,12 @@ module.exports = {
         .setDescription('Adds 2 numbers together.')
         .addNumberOption(option =>
             option.setName('number1')
-            .setDescription('The first number'))
+            .setDescription('The first number')
+            .setRequired(true))
         .addNumberOption(option =>
             option.setName('number2')
-            .setDescription('The second number')),
+            .setDescription('The second number')
+            .setRequired(true)),
     async execute(interaction) {
         const { options } = interaction;
         const num1 = options.getNumber('number1')
