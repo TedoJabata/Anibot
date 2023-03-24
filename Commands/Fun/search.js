@@ -6,9 +6,9 @@ module.exports = {
     name: 'search',
     execute: async(message, args) => {
         client.search(args.join(' '))
-            .then(images => {
+            .then(async images => {
                 images = images.filter(img => !img.url.endsWith('.svg'));
-                message.reply(`${images[Math.floor(Math.random() * images.length)].url}`)
+                await message.reply(`${images[Math.floor(Math.random() * images.length)].url}`)
             });
     }
 }
