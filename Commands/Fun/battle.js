@@ -27,11 +27,7 @@ module.exports = {
         if ((args[0] == 'reset' || args[0] == 'r' || args == 'reset') && premission) {
             Player1.id = ''
             battleReset = true
-            if (isInteraction) {
-                await interaction.reply(`Resetting the battle...`)
-            } else {
-                await message.reply(`Resetting the battle...`)
-            }
+            await Print(isInteraction, `Resetting the battle...`, true, interaction, message)
         } else {
             let pokemon
             if (isInteraction) {
@@ -40,11 +36,7 @@ module.exports = {
                 pokemon = await ChoosePokemon(message.author.id, message.author.tag.slice(0, -5))
             }
             if (!pokemon) {
-                if (isInteraction) {
-                    await interaction.reply(`You have no pokemons to use for a battle.`)
-                } else {
-                    await message.reply(`You have no pokemons to use for a battle.`)
-                }
+                await Print(isInteraction, `You have no pokemons to use for a battle.`, true, interaction, message)
             } else {
                 if (battleReset == undefined || battleReset == true) {
                     battleReset = false
@@ -55,13 +47,11 @@ module.exports = {
                         Player1.name = message.author.tag.slice(0, -5)
                         Player1.id = message.author.id
                     }
+
                     Player1.pokeName = pokemon.name
                     Player1.pokeAtk = pokemon.attack
-                    if (isInteraction) {
-                        await interaction.reply(`Waiting for an opponent...`)
-                    } else {
-                        await message.reply(`Waiting for an opponent...`)
-                    }
+
+                    await Print(isInteraction, `Waiting for an opponent...`, true, interaction, message)
                 } else {
                     let isSamePlayer
                     if (isInteraction) {
@@ -74,11 +64,7 @@ module.exports = {
                         }
                     }
                     if (isSamePlayer) {
-                        if (isInteraction) {
-                            await interaction.reply(`You can't battle yourself!`)
-                        } else {
-                            await message.reply(`You can't battle yourself!`)
-                        }
+                        await Print(isInteraction, `You can't battle yourself!`, true, interaction, message)
                     } else {
                         if (isInteraction) {
                             Player2.name = interaction.user.tag.slice(0, -5)
@@ -88,29 +74,29 @@ module.exports = {
                         Player2.pokeName = pokemon.name
                         Player2.pokeAtk = pokemon.attack
                         if (Player1.pokeAtk > Player2.pokeAtk) {
-                            if (isInteraction) {
-                                await interaction.reply(`***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)*** was brutally beaten from ***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)!***\n***${Player1.name}*** wins!`)
-                            } else {
-                                await message.channel.send(`***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)*** was brutally beaten from ***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)!***\n***${Player1.name}*** wins!`)
-                            }
+                            await Print(isInteraction, `***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)*** was brutally beaten from ***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)!***\n***${Player1.name}*** wins!`, false, interaction, message)
                         } else if (Player1.pokeAtk < Player2.pokeAtk) {
-                            if (isInteraction) {
-                                await interaction.reply(`***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)*** was brutally beaten from ***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)!***\n***${Player2.name}*** wins!`)
-                            } else {
-                                await message.channel.send(`***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)*** was brutally beaten from ***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)!***\n***${Player2.name}*** wins!`)
-                            }
+                            await Print(isInteraction, `***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)*** was brutally beaten from ***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)!***\n***${Player2.name}*** wins!`, false, interaction, message)
                         } else {
-                            if (isInteraction) {
-                                await interaction.reply(`The battle ends in a draw!`)
-                            } else {
-                                await message.channel.send(`The battle ends in a draw!`)
-                            }
+                            await Print(isInteraction, `The battle ends in a draw!`, false, interaction, message)
                         }
                         Player1.id = ''
                         battleReset = true
                     }
                 }
             }
+        }
+    }
+}
+
+async function Print(isInteraction, text, reply, interaction, message) {
+    if (isInteraction) {
+        await interaction.reply(text)
+    } else {
+        if (reply) {
+            await message.reply(text)
+        } else {
+            await message.channel.send(text)
         }
     }
 }

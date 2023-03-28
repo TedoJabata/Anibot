@@ -1,2 +1,2 @@
-const pokename = ''
-const pokeattack = 0
+let pokename = ''
+let pokeattack = 0
