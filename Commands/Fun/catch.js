@@ -1,6 +1,6 @@
 require("../../global")
 
-const { UserExists, CreateUser, CreatePokemon } = require("../../Controllers/dbController")
+const { UserExists, CreateUser, CreatePokemon } = require("../../Controllers/DBController")
 
 module.exports = {
     name: 'catch',

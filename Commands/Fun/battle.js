@@ -1,4 +1,4 @@
-const { ChoosePokemon } = require("../../Controllers/dbController")
+const { ChoosePokemon } = require("../../Controllers/DBController")
 
 const Player1 = {
     id: '',
