@@ -7,6 +7,6 @@ module.exports = {
     async execute(interaction, client) {
         let cmd = require(`../../Fun/catch`)
         cmd = client.commands.get('catch')
-        await cmd.execute(client, '', '', true, interaction)
+        await cmd.execute('', '', client, true, interaction)
     },
 };

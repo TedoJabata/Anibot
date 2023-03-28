@@ -17,8 +17,8 @@ module.exports = {
                 pokename = fixedName;
                 pokeattack = attack;
 
-                let search = fixedName + ' pokemon';
-
+                //FOR IMAGE RESULT
+                //let search = fixedName + ' pokemon';
                 // client.search(search)
                 //     .then(images => {
                 //         images = images.filter(img => !img.url.endsWith('.svg'));
@@ -29,10 +29,11 @@ module.exports = {
                 //             message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}*** \n${image}`);
                 //         }
                 //     });
+
                 if (isInteraction) {
                     interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`)
                 } else {
-                    message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***}`);
+                    message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`);
                 }
             })
     }
