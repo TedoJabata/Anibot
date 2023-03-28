@@ -17,17 +17,23 @@ module.exports = {
                 pokename = fixedName;
                 pokeattack = attack;
 
-                client.search(fixedName)
-                    .then(images => {
-                        images = images.filter(img => !img.url.endsWith('.svg'));
-                        let image = images[Math.floor(Math.random() * images.length)].url
-                        if (isInteraction) {
-                            interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}*** \n${image}`)
-                        } else {
-                            message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}*** \n${image}`);
-                        }
-                    });
+                let search = fixedName + ' pokemon';
 
+                // client.search(search)
+                //     .then(images => {
+                //         images = images.filter(img => !img.url.endsWith('.svg'));
+                //         let image = images[Math.floor(Math.random() * images.length)].url
+                //         if (isInteraction) {
+                //             interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}*** \n${image}`)
+                //         } else {
+                //             message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}*** \n${image}`);
+                //         }
+                //     });
+                if (isInteraction) {
+                    interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`)
+                } else {
+                    message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***}`);
+                }
             })
     }
 }

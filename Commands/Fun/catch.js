@@ -23,16 +23,16 @@ module.exports = {
 
         if (!userExists) {
             if (isInteraction) {
-                await CreateUser(interaction.user.id, interaction.user.name)
+                await CreateUser(interaction.user.id, interaction.user.tag.slice(0, -5))
             } else {
-                await CreateUser(message.author.id, message.author.id)
+                await CreateUser(message.author.id, message.author.tag.slice(0, -5))
             }
         }
-
+        ////////////////////////
         if (isInteraction) {
-            await CreatePokemon(pokename, pokeattack, interaction.user.id, interaction.user.name)
+            await CreatePokemon(pokename, pokeattack, interaction.user.id, interaction.user.tag.slice(0, -5))
         } else {
-            await CreatePokemon(pokename, pokeattack, message.author.id, message.author.name)
+            await CreatePokemon(pokename, pokeattack, message.author.id, message.author.tag.slice(0, -5))
         }
 
         if (isInteraction) {

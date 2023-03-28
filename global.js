@@ -1,2 +1,2 @@
 const pokename = ''
-const pokeattack = 0;
+const pokeattack = 0

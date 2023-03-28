@@ -61,6 +61,7 @@ client.on(Events.MessageCreate, async message => {
 
 client.on(Events.InteractionCreate, async interaction => {
     InteractionHandler(interaction, client)
+    interaction.user.tag
 });
 
 

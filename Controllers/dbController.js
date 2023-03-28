@@ -28,4 +28,18 @@ async function AddPokemonToUser(pokemonId, userId, username) {
     foundUser.save()
 }
 
-module.exports = { UserExists, CreateUser, CreatePokemon }
+async function ChoosePokemon(userId, username) {
+    let foundUser = await UserSchema.findOne({ discordId: userId })
+    if (!foundUser) {
+        await CreateUser(userId, username)
+        foundUser = await UserSchema.findOne({ discordId: userId })
+    }
+    if (foundUser.pokemons.length != 0) {
+        let pokemonId = foundUser.pokemons[Math.floor(Math.floor(Math.random() * foundUser.pokemons.length))]
+        let foundPokemon = await PokemonSchema.findOne({ _id: pokemonId })
+        return foundPokemon
+    }
+
+}
+
+module.exports = { UserExists, CreateUser, CreatePokemon, ChoosePokemon }
