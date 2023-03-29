@@ -3,7 +3,7 @@ const { RegisterSlashCommands } = require("../../SlashRegistrant")
 module.exports = {
     name: 'reloadslashes',
     execute: async(message) => {
-        if (message.author.id == '978754737031761960') {
+        if (message.member.permissions.has('Administrator')) {
             RegisterSlashCommands(['Fun', 'Math', 'Moderation'])
             await message.channel.send(`Reloaded all slash commands!`);
         } else {
