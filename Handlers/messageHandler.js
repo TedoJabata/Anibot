@@ -3,8 +3,7 @@ const config = require('../config.json')
 async function MessageHandler(message, client) {
     if (message.author.bot || !message.guild) return
     const prefix = config.prefix
-
-    if (!message.content.startsWith(prefix)) return
+    if (message.content.split(' ')[0] != prefix) return
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
