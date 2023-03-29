@@ -13,9 +13,8 @@ module.exports = {
             .setDescription('The second number')
             .setRequired(true)),
     async execute(interaction) {
-        const { options } = interaction;
-        const num1 = options.getNumber('number1')
-        const num2 = options.getNumber('number2')
+        const num1 = interaction.options.getNumber('number1')
+        const num2 = interaction.options.getNumber('number2')
         await interaction.reply(`The result is: ***${String(num1 + num2)}***`);
     },
 }

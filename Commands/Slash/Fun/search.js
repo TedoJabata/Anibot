@@ -6,14 +6,13 @@ const client = new GoogleImages(process.env.SEARCH_MACHINE_ID, process.env.GOOGL
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('search')
-        .setDescription('Searches for an image')
+        .setDescription('Searches for an image.')
         .addStringOption(option =>
             option.setName('argument')
             .setDescription('The first number')
             .setRequired(true)),
     async execute(interaction) {
-        const { options } = interaction;
-        const arg = options.getString('argument')
+        const arg = interaction.options.getString('argument')
 
         client.search(arg)
             .then(async images => {

@@ -7,7 +7,7 @@ module.exports = {
         .addStringOption(option =>
             option
             .setName('reset')
-            .setDescription('If you want to reset eneter "reset" here')),
+            .setDescription('If you want to reset eneter "reset"')),
     async execute(interaction, client) {
         let reset = interaction.options.getString('reset');
         let cmd = require(`../../Fun/battle`)
