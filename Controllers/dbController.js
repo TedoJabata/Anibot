@@ -1,5 +1,5 @@
-const UserSchema = require("../Models/User")
-const PokemonSchema = require("../Models/Pokemon")
+const UserSchema = require("../Models/UserModel")
+const PokemonSchema = require("../Models/PokemonModel")
 
 async function UserExists(userId) {
     let foundUser = await UserSchema.findOne({ discordId: userId })
