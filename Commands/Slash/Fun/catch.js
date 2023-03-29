@@ -9,4 +9,4 @@ module.exports = {
         cmd = await client.commands.get('catch')
         await cmd.execute(null, null, client, true, interaction)
     },
-};
+}

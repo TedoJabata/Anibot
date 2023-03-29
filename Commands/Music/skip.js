@@ -1,14 +1,17 @@
+const { Send } = require("../../Controllers/ReplyController")
+
 module.exports = {
     name: 'skip',
     inVoiceChannel: true,
-    execute: async(message, args, client) => {
+    execute: async(message, args, client, isInteraction, interaction) => {
         const queue = client.distube.getQueue(message)
-        if (!queue) return await message.channel.send(`${client.emotes.error} | There is nothing in the queue right now!`)
+        if (!queue) return await Send(isInteraction, `${client.emotes.error} | There is nothing in the queue right now!`, true, interaction, message)
         try {
             const song = await queue.skip()
-            await message.channel.send(`${client.emotes.success} | Skipped! Now playing:\n${song.name}`)
+            await Send(isInteraction, `${client.emotes.success} | Skipped!`, false, interaction, message)
         } catch (e) {
-            await message.channel.send(`${client.emotes.error} | ${e}`)
+            let error = e.toString().split(' ').slice(2).join(' ')
+            await Send(isInteraction, `${client.emotes.error} | ${error}`, true, interaction, message)
         }
     }
 }

@@ -17,4 +17,4 @@ module.exports = {
         }
         await cmd.execute(null, reset, client, true, interaction)
     },
-};
+}

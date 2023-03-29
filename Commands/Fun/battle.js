@@ -1,4 +1,5 @@
 const { ChoosePokemon } = require("../../Controllers/DBController")
+const { Send } = require("../../Controllers/ReplyController")
 
 const Player1 = {
     id: '',
@@ -27,7 +28,7 @@ module.exports = {
         if ((args[0] == 'reset' || args[0] == 'r' || args == 'reset') && premission) {
             Player1.id = ''
             battleReset = true
-            await Print(isInteraction, `Resetting the battle...`, true, interaction, message)
+            await Send(isInteraction, `Resetting the battle...`, true, interaction, message)
         } else {
             let pokemon
             if (isInteraction) {
@@ -36,7 +37,7 @@ module.exports = {
                 pokemon = await ChoosePokemon(message.author.id, message.author.tag.slice(0, -5))
             }
             if (!pokemon) {
-                await Print(isInteraction, `You have no pokemons to use for a battle.`, true, interaction, message)
+                await Send(isInteraction, `You have no pokemons to use for a battle.`, true, interaction, message)
             } else {
                 if (battleReset == undefined || battleReset == true) {
                     battleReset = false
@@ -51,7 +52,7 @@ module.exports = {
                     Player1.pokeName = pokemon.name
                     Player1.pokeAtk = pokemon.attack
 
-                    await Print(isInteraction, `Waiting for an opponent...`, true, interaction, message)
+                    await Send(isInteraction, `Waiting for an opponent...`, true, interaction, message)
                 } else {
                     let isSamePlayer
                     if (isInteraction) {
@@ -64,7 +65,7 @@ module.exports = {
                         }
                     }
                     if (isSamePlayer) {
-                        await Print(isInteraction, `You can't battle yourself!`, true, interaction, message)
+                        await Send(isInteraction, `You can't battle yourself!`, true, interaction, message)
                     } else {
                         if (isInteraction) {
                             Player2.name = interaction.user.tag.slice(0, -5)
@@ -74,29 +75,17 @@ module.exports = {
                         Player2.pokeName = pokemon.name
                         Player2.pokeAtk = pokemon.attack
                         if (Player1.pokeAtk > Player2.pokeAtk) {
-                            await Print(isInteraction, `***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)*** was brutally beaten from ***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)!***\n***${Player1.name}*** wins!`, false, interaction, message)
+                            await Send(isInteraction, `***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)*** was brutally beaten from ***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)!***\n***${Player1.name}*** wins!`, false, interaction, message)
                         } else if (Player1.pokeAtk < Player2.pokeAtk) {
-                            await Print(isInteraction, `***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)*** was brutally beaten from ***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)!***\n***${Player2.name}*** wins!`, false, interaction, message)
+                            await Send(isInteraction, `***${Player1.name}'s ${Player1.pokeName}(${Player1.pokeAtk}atk)*** was brutally beaten from ***${Player2.name}'s ${Player2.pokeName}(${Player2.pokeAtk}atk)!***\n***${Player2.name}*** wins!`, false, interaction, message)
                         } else {
-                            await Print(isInteraction, `The battle ends in a draw!`, false, interaction, message)
+                            await Send(isInteraction, `The battle ends in a draw!`, false, interaction, message)
                         }
                         Player1.id = ''
                         battleReset = true
                     }
                 }
             }
-        }
-    }
-}
-
-async function Print(isInteraction, text, reply, interaction, message) {
-    if (isInteraction) {
-        await interaction.reply(text)
-    } else {
-        if (reply) {
-            await message.reply(text)
-        } else {
-            await message.channel.send(text)
         }
     }
 }

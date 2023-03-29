@@ -10,4 +10,4 @@ module.exports = {
         await RegisterSlashCommands(['Fun', 'Math', 'Moderation'])
         await interaction.reply(`Reloaded all slash commands!`)
     },
-};
+}

@@ -7,4 +7,4 @@ module.exports = {
     async execute(interaction) {
         await interaction.reply(`Hello <@${interaction.user.id}>!`)
     },
-};
+}

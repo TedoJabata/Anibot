@@ -2,7 +2,6 @@ const { REST, Routes } = require('discord.js')
 const fs = require('node:fs')
 require("dotenv/config")
 
-
 async function RegisterSlashCommands(paths) {
     const slashCommands = []
 
@@ -13,7 +12,7 @@ async function RegisterSlashCommands(paths) {
             slashCommands.push(slashCommand.data.toJSON())
         }
     }
-    const rest = new REST({ version: '10' }).setToken(process.env.TOKEN)
+    const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
     (async() => {
         let guildId = '1004132716335333376'

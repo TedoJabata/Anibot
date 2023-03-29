@@ -60,7 +60,7 @@ db.once("open", function() {
 
 client.on(Events.ClientReady, () => {
     ReadCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
-    ReadSlashCommands(['Fun', 'Math', 'Moderation'], client)
+    ReadSlashCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
     console.log('The bot is ready.')
 })
 
