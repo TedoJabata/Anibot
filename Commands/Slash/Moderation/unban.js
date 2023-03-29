@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,8 +12,8 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .setDMPermission(false),
     async execute(interaction) {
-        const target = interaction.options.getUser('target');
+        const target = await interaction.options.getUser('target')
         await interaction.guild.members.unban(target);
-        await interaction.reply(`***${target.username}*** was unbanned.`);
+        await interaction.reply(`***${target.username}*** was unbanned.`)
     }
 }

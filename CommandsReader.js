@@ -1,21 +1,24 @@
 const fs = require('fs')
 
-async function ReadCommands(path, client) {
-    const commandFiles = fs.readdirSync('./Commands/' + path).filter(file => file.endsWith('.js'));
+async function ReadCommands(categories, client) {
+    for (let i = 0; i < categories.length; i++) {
+        const commandFiles = fs.readdirSync('./Commands/' + categories[i]).filter(file => file.endsWith('.js'))
 
-    for (const file of commandFiles) {
-        const command = require(`./Commands/${path}/${file}`);
-        client.commands.set(command.name, command);
+        for (const file of commandFiles) {
+            const command = require(`./Commands/${categories[i]}/${file}`)
+            await client.commands.set(command.name, command)
+        }
     }
+
 }
 
-async function ReadSlashCommands(paths, client) {
-    for (let i = 0; i < paths.length; i++) {
-        const slashCommandFiles = fs.readdirSync('./Commands/Slash/' + paths[i]).filter(file => file.endsWith('.js'));
+async function ReadSlashCommands(categories, client) {
+    for (let i = 0; i < categories.length; i++) {
+        const slashCommandFiles = fs.readdirSync('./Commands/Slash/' + categories[i]).filter(file => file.endsWith('.js'))
 
         for (const file of slashCommandFiles) {
-            const slashCommand = require(`./Commands/Slash/${paths[i]}/${file}`);
-            client.slashCommands.set(slashCommand.data.name, slashCommand);
+            const slashCommand = require(`./Commands/Slash/${categories[i]}/${file}`)
+            await client.slashCommands.set(slashCommand.data.name, slashCommand)
         }
     }
 

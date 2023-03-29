@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -16,12 +16,12 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .setDMPermission(false),
     async execute(interaction) {
-        const target = interaction.options.getUser('target');
-        let reason = interaction.options.getString('reason');
+        const target = interaction.options.getUser('target')
+        let reason = interaction.options.getString('reason')
         if (!reason) {
             reason = 'No reason provided';
         }
-        await interaction.guild.members.ban(target, { reason });
-        await interaction.reply(`***${target.username}*** was banned for reason: ${reason}`);
+        await interaction.guild.members.ban(target, { reason })
+        await interaction.reply(`***${target.username}*** was banned for reason: ${reason}`)
     }
 }

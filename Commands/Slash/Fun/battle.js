@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,12 +9,12 @@ module.exports = {
             .setName('reset')
             .setDescription('If you want to reset eneter "reset"')),
     async execute(interaction, client) {
-        let reset = interaction.options.getString('reset');
+        let reset = interaction.options.getString('reset')
         let cmd = require(`../../Fun/battle`)
         cmd = client.commands.get('battle')
         if (!reset) {
             reset = ''
         }
-        await cmd.execute('', reset, client, true, interaction)
+        await cmd.execute(null, reset, client, true, interaction)
     },
 };

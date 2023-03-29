@@ -1,6 +1,5 @@
-require("../../global")
-
 const { UserExists, CreateUser, CreatePokemon } = require("../../Controllers/DBController")
+require("../../global")
 
 module.exports = {
     name: 'catch',
@@ -9,9 +8,9 @@ module.exports = {
             if (isInteraction) {
                 await interaction.reply(`No pokemons around to be catched!`)
             } else {
-                await message.channel.send(`No pokemons around to be catched!`);
+                await message.channel.send(`No pokemons around to be catched!`)
             }
-            return;
+            return
         }
 
         let userExists

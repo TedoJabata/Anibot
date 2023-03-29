@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const GoogleImages = require('google-images');
-require("dotenv/config");
 const client = new GoogleImages(process.env.SEARCH_MACHINE_ID, process.env.GOOGLE_API_KEY);
+require("dotenv/config");
 
 module.exports = {
     data: new SlashCommandBuilder()

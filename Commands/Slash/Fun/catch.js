@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -6,7 +6,7 @@ module.exports = {
         .setDescription('Catches a pokemon.'),
     async execute(interaction, client) {
         let cmd = require(`../../Fun/catch`)
-        cmd = client.commands.get('catch')
-        await cmd.execute('', '', client, true, interaction)
+        cmd = await client.commands.get('catch')
+        await cmd.execute(null, null, client, true, interaction)
     },
 };

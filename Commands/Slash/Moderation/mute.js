@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -16,11 +16,11 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers)
         .setDMPermission(false),
     async execute(interaction) {
-        const target = interaction.options.getUser('target');
-        const reason = interaction.options.getString('reason');
-        // var role = interaction.guild.roles.cache.find(role => role.name === "Muted");
-        // target.roles.add(role)
-        // await interaction.reply(`${target.username} was muted for reason: ${reason}`);
-        await interaction.reply(`WIP`);
+        const target = interaction.options.getUser('target')
+        const reason = interaction.options.getString('reason')
+            // var role = interaction.guild.roles.cache.find(role => role.name === "Muted");
+            // target.roles.add(role)
+            // await interaction.reply(`${target.username} was muted for reason: ${reason}`);
+        await interaction.reply(`WIP`)
     }
 }

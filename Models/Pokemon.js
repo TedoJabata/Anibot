@@ -8,4 +8,4 @@ const Pokemon = new Schema({
 });
 
 mongoose.model('Pokemon', Pokemon)
-module.exports = mongoose.model('Pokemon', Pokemon, "pokemons");
+module.exports = mongoose.model('Pokemon', Pokemon, "pokemons")

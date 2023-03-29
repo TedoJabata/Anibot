@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,6 +15,6 @@ module.exports = {
     async execute(interaction) {
         const num1 = interaction.options.getNumber('number1')
         const num2 = interaction.options.getNumber('number2')
-        await interaction.reply(`The result is: ***${String(num1 + num2)}***`);
+        await interaction.reply(`The result is: ***${String(num1 + num2)}***`)
     },
 }

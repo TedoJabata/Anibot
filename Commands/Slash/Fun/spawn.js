@@ -6,7 +6,7 @@ module.exports = {
         .setDescription('Spawns a pokemon.'),
     async execute(interaction, client) {
         let cmd = require(`../../Fun/spawn`)
-        cmd = client.commands.get('spawn')
-        await cmd.execute('', '', client, true, interaction)
+        cmd = await client.commands.get('spawn')
+        await cmd.execute(null, null, client, true, interaction)
     },
 };

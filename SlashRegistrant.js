@@ -1,48 +1,48 @@
-require("dotenv/config");
-const { REST, Routes } = require('discord.js');
-const fs = require('node:fs');
+const { REST, Routes } = require('discord.js')
+const fs = require('node:fs')
+require("dotenv/config")
 
 
 async function RegisterSlashCommands(paths) {
-    const slashCommands = [];
+    const slashCommands = []
 
     for (let i = 0; i < paths.length; i++) {
-        let slashCommandFiles = fs.readdirSync('./Commands/Slash/' + paths[i]).filter(file => file.endsWith('.js'));
+        let slashCommandFiles = fs.readdirSync('./Commands/Slash/' + paths[i]).filter(file => file.endsWith('.js'))
         for (const file of slashCommandFiles) {
-            let slashCommand = require(`./Commands/Slash/${paths[i]}/${file}`);
-            slashCommands.push(slashCommand.data.toJSON());
+            let slashCommand = require(`./Commands/Slash/${paths[i]}/${file}`)
+            slashCommands.push(slashCommand.data.toJSON())
         }
     }
-    const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
+    const rest = new REST({ version: '10' }).setToken(process.env.TOKEN)
 
     (async() => {
         let guildId = '1004132716335333376'
         try {
-            console.log(`Started refreshing ${slashCommands.length} application (/) commands.`);
+            console.log(`Started refreshing ${slashCommands.length} application (/) commands.`)
 
             // DELETE ALL
             // await rest.put(Routes.applicationGuildCommands(process.env.APP_ID, guildId), { body: [] })
             //     .then(() => console.log('Successfully deleted all guild commands.'))
-            //     .catch(console.error);
+            //     .catch(console.error)
 
             // SERVER -->
             const data = await rest.put(
                 Routes.applicationGuildCommands(process.env.APP_ID, guildId), { body: slashCommands },
-            );
+            )
 
             // GLOBAL -->
             // const data = await rest.put(
-            //     Routes.applicationCommands(process.env.APP_ID), { body: slashCommands },
-            // );
+            //     Routes.applicationCommands(process.env.APP_ID), { body: slashCommands }
+            // )
 
             // DELETE ONE
             // rest.delete(Routes.applicationGuildCommand(process.env.APP_ID, guildId, '1085851578642206741'))
             //     .then(() => console.log('Successfully deleted guild command'))
-            //     .catch(console.error);
+            //     .catch(console.error)
 
-            // console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+            console.log(`Successfully reloaded ${data.length} application (/) commands.`)
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
     })();
 }

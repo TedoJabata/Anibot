@@ -5,13 +5,13 @@ const Player1 = {
     name: '',
     pokeName: '',
     pokeAtk: 0,
-};
+}
 
 const Player2 = {
     name: '',
     pokeName: '',
     pokeAtk: 0,
-};
+}
 
 let battleReset = true
 
