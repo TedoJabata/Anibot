@@ -30,6 +30,7 @@ module.exports = {
                 //         }
                 //     });
 
+                //NO IMAGE
                 if (isInteraction) {
                     interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`)
                 } else {
