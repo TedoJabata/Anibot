@@ -7,9 +7,9 @@ async function MessageHandler(message, client) {
 
     if (message.content.split(' ')[0] != prefix) return
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/g)
-    const command = args.shift().toLowerCase()
-    const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command))
+    let args = message.content.slice(prefix.length).trim().split(/ +/g)
+    let command = args.shift().toLowerCase()
+    let cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command))
 
     if (!cmd) { await message.channel.send("Invalid command"); return }
 

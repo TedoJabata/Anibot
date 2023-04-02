@@ -30,8 +30,10 @@ client.distube = new DisTube(client, {
             emitEventsAfterFetching: true
         }),
         new SoundCloudPlugin(),
-        new YtDlpPlugin()
-    ]
+        new YtDlpPlugin(),
+    ],
+    leaveOnStop: false,
+    customFilters: { "earrape": "bass=g=50,treble=g=20", "vaporwave": "aresample=48000,asetrate=48000*0.8", "nightcore": "aresample=48000,asetrate=48000*1.25", "8d": "apulsator=hz=0.08", },
 })
 
 //HANDLERS, REGISTRANT & READER
