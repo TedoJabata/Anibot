@@ -2,27 +2,20 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('mute')
-        .setDescription('Select a member and mute them.')
+        .setName('unmute')
+        .setDescription('Select a member and unmute them.')
         .addUserOption(option =>
             option
             .setName('target')
-            .setDescription('The member to mute')
+            .setDescription('The member to unmute')
             .setRequired(true))
-        .addStringOption(option =>
-            option
-            .setName('reason')
-            .setDescription('The reason for muting'))
         .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers)
         .setDMPermission(false),
     async execute(interaction) {
         let target = interaction.options.getMember('target')
-        let reason = interaction.options.getString('reason')
-
         const role = interaction.guild.roles.cache.find(role => role.name === 'Muted')
-        target.roles.add(role)
 
-        if (!reason) reason = 'No provided reason'
-        await interaction.reply(`${target.user.username} was muted for reason: ${reason}`)
+        target.roles.remove(role)
+        await interaction.reply(`${target.user.username} was unmuted.`)
     }
 }
