@@ -4,6 +4,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client({
     intents: [
         Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.GuildMembers,
         Discord.GatewayIntentBits.GuildMessages,
         Discord.GatewayIntentBits.GuildVoiceStates,
         Discord.GatewayIntentBits.MessageContent
@@ -59,11 +60,13 @@ db.once("open", function() {
     console.log("Database connected")
 })
 
+//REGISTER ALL COMMANDS
+ReadCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
+ReadSlashCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
+DisTubeEventsListener(client)
+
 //LISTENERS
 client.on(Events.ClientReady, () => {
-    ReadCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
-    ReadSlashCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
-    DisTubeEventsListener(client)
     console.log('The bot is ready.')
 })
 
@@ -76,8 +79,25 @@ client.on(Events.InteractionCreate, async interaction => {
 })
 
 client.on(Events.GuildMemberAdd, async member => {
-    // const role = guild.roles.find(role => role.name === 'Member') //WIP
-    // member.addRole(role)
+    console.log('5')
+    const role = member.guild.roles.cache.find(role => role.name === 'Member') //WIP
+    console.log('4')
+    member.roles.add(role)
+
+    console.log('3')
+
+    console.log('2')
+    const welcomembed = new Discord.EmbedBuilder()
+        .setColor('6AAE5D')
+        .setTitle('Welcome ' + member.user.username)
+        .setAuthor({ name: await member.guild.fetchOwner().user.username, iconURL: await member.guild.fetchOwner().avatarURL() })
+        .setDescription('You automaticly got the role "Member".')
+        .setThumbnail(member.user.avatarURL())
+        .setTimestamp()
+    console.log('1')
+    let channel = member.guild.channels.cache.get("1092162519046561902")
+    console.log('0')
+    await channel.send({ content: `<@${member.user.id}>`, embeds: [welcomembed] })
 })
 
 //LOGIN
