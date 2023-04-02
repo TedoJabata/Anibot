@@ -1,5 +1,7 @@
+const config = require('../config.json')
+
 async function OnJoin(member, Discord) {
-    const role = member.guild.roles.cache.find(role => role.name === 'Member')
+    const role = member.guild.roles.cache.find(role => role.name === config.defaultRoleName)
     member.roles.add(role)
 
     const welcomembed = new Discord.EmbedBuilder()
@@ -13,12 +15,12 @@ async function OnJoin(member, Discord) {
         .setThumbnail(member.user.avatarURL())
         .setTimestamp()
 
-    let channel = member.guild.channels.cache.get('1092162519046561902')
+    let channel = member.guild.channels.cache.get(config.joinLeaveChannelId)
     await channel.send({ content: `<@${member.user.id}>`, embeds: [welcomembed] })
 }
 
 async function OnLeave(member, client) {
-    let channel = client.channels.cache.get('1092162519046561902')
+    let channel = client.channels.cache.get(config.joinLeaveChannelId)
     await channel.send({ content: `***${member.user.username}*** left the server ` + client.emotes.sad })
 }
 

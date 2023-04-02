@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
+const config = require('../../../config.json')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -19,10 +20,10 @@ module.exports = {
         let target = interaction.options.getMember('target')
         let reason = interaction.options.getString('reason')
 
-        const role = interaction.guild.roles.cache.find(role => role.name === 'Muted')
+        const role = interaction.guild.roles.cache.find(role => role.name === config.mutedRoleName)
         target.roles.add(role)
 
         if (!reason) reason = 'No provided reason'
-        await interaction.reply(`${target.user.username} was muted for reason: ${reason}`)
+        await interaction.reply(`***${target.user.username}*** was muted for reason: ${reason}`)
     }
 }

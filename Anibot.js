@@ -32,8 +32,7 @@ client.distube = new DisTube(client, {
         new SoundCloudPlugin(),
         new YtDlpPlugin(),
     ],
-    leaveOnStop: false,
-    customFilters: { "earrape": "bass=g=50,treble=g=20", "vaporwave": "aresample=48000,asetrate=48000*0.8", "nightcore": "aresample=48000,asetrate=48000*1.25", "8d": "apulsator=hz=0.08", },
+    leaveOnStop: true
 })
 
 //HANDLERS, REGISTRANT & READER
@@ -68,7 +67,6 @@ db.once("open", function() {
 //REGISTER ALL COMMANDS
 ReadCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
 ReadSlashCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
-DisTubeEventsListener(client)
 
 //LISTENERS
 client.on(Events.ClientReady, () => {
@@ -90,6 +88,8 @@ client.on(Events.GuildMemberAdd, async member => {
 client.on(Events.GuildMemberRemove, async member => {
     OnLeave(member, client)
 })
+
+DisTubeEventsListener(client)
 
 //LOGIN
 client.login(process.env.TOKEN)
