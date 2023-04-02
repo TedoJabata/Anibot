@@ -18,7 +18,7 @@ const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 const { DisTubeEventsListener } = require('./DisTubeEventsListener')
-require("discord-player/smoothVolume");
+require('discord-player/smoothVolume');
 
 client.distube = new DisTube(client, {
     leaveOnStop: false,
@@ -34,30 +34,33 @@ client.distube = new DisTube(client, {
     ]
 })
 
-//HANDLERS & REGISTRANT & READER
-const { InteractionHandler } = require("./Handlers/InteractionHandler")
-const { MessageHandler } = require("./Handlers/MessageHandler")
-const { ReadCommands, ReadSlashCommands } = require("./CommandsReader")
+//HANDLERS, REGISTRANT & READER
+const { InteractionHandler } = require('./Handlers/InteractionHandler')
+const { MessageHandler } = require('./Handlers/MessageHandler')
+const { ReadCommands, ReadSlashCommands } = require('./CommandsReader')
+
+//JOIN & LEAVE MESSAGES
+const { OnJoin, OnLeave } = require('./Controllers/JoinLeaveController')
 
 //CONFIGS
 const config = require('./config.json')
 client.config = require('./config.json')
-require("dotenv/config")
-require("discord-player/smoothVolume")
+require('dotenv/config')
+require('discord-player/smoothVolume')
 
-//COMANDS - SLASHES - EMOTES
+//COMANDS, SLASHES & EMOTES
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
 client.slashCommands = new Discord.Collection()
 client.emotes = config.emoji
 
 //DATABASE
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO, { useNewUrlParser: true })
 
 const db = mongoose.connection
 db.once("open", function() {
-    console.log("Database connected")
+    console.log('Database connected')
 })
 
 //REGISTER ALL COMMANDS
@@ -79,22 +82,12 @@ client.on(Events.InteractionCreate, async interaction => {
 })
 
 client.on(Events.GuildMemberAdd, async member => {
-    const role = member.guild.roles.cache.find(role => role.name === 'Member')
-    await member.roles.add(role)
+    OnJoin(member, Discord)
+})
 
-    const welcomembed = new Discord.EmbedBuilder()
-        .setColor('6AAE5D')
-        .setTitle(`Welcome ${member.user.username} to ${member.guild.name}`)
-        .setAuthor({
-            name: (await member.guild.fetchOwner()).user.username,
-            iconURL: (await member.guild.fetchOwner()).avatarURL()
-        })
-        .setDescription('You automaticly got the role "Member".')
-        .setThumbnail(member.user.avatarURL())
-        .setTimestamp()
-
-    let channel = member.guild.channels.cache.get('1092162519046561902')
-    await channel.send({ content: `<@${member.user.id}>`, embeds: [welcomembed] })
+client.on(Events.GuildMemberRemove, async member => {
+    console.log('left')
+    OnLeave(member, client)
 })
 
 //LOGIN
