@@ -1,5 +1,3 @@
-require('events').EventEmitter.defaultMaxListeners = 15;
-
 async function DisTubeEventsListener(client) {
     client.distube
         .on('playSong', (queue, song) =>
