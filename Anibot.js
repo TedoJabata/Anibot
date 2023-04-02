@@ -79,24 +79,21 @@ client.on(Events.InteractionCreate, async interaction => {
 })
 
 client.on(Events.GuildMemberAdd, async member => {
-    console.log('5')
-    const role = member.guild.roles.cache.find(role => role.name === 'Member') //WIP
-    console.log('4')
-    member.roles.add(role)
+    const role = member.guild.roles.cache.find(role => role.name === 'Member')
+    await member.roles.add(role)
 
-    console.log('3')
-
-    console.log('2')
     const welcomembed = new Discord.EmbedBuilder()
         .setColor('6AAE5D')
-        .setTitle('Welcome ' + member.user.username)
-        .setAuthor({ name: await member.guild.fetchOwner().user.username, iconURL: await member.guild.fetchOwner().avatarURL() })
+        .setTitle(`Welcome ${member.user.username} to ${member.guild.name}`)
+        .setAuthor({
+            name: (await member.guild.fetchOwner()).user.username,
+            iconURL: (await member.guild.fetchOwner()).avatarURL()
+        })
         .setDescription('You automaticly got the role "Member".')
         .setThumbnail(member.user.avatarURL())
         .setTimestamp()
-    console.log('1')
-    let channel = member.guild.channels.cache.get("1092162519046561902")
-    console.log('0')
+
+    let channel = member.guild.channels.cache.get('1092162519046561902')
     await channel.send({ content: `<@${member.user.id}>`, embeds: [welcomembed] })
 })
 
