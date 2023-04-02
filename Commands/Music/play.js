@@ -13,6 +13,7 @@ module.exports = {
         }
         if (!searchString) return await Send(isInteraction, `${client.emotes.error} | Please enter a song url or query to search.`, true, interaction, message)
         if (isInteraction) {
+            interaction.reply('Added!')
             await client.distube.play(interaction.member.voice.channel, searchString, {
                 member: interaction.member,
                 textChannel: interaction.channel,

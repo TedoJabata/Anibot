@@ -5,7 +5,12 @@ module.exports = {
     aliases: ['resume', 'unpause'],
     inVoiceChannel: true,
     execute: async(message, args, client, isInteraction, interaction) => {
-        const queue = await client.distube.getQueue(message)
+        let queue
+        if (isInteraction) {
+            queue = await client.distube.getQueue(interaction)
+        } else {
+            queue = await client.distube.getQueue(message)
+        }
         if (!queue) return await Send(isInteraction, `${client.emotes.error} | There is nothing in the queue right now!`, true, interaction, message)
 
         if (queue.paused) {
