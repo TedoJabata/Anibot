@@ -86,7 +86,6 @@ client.on(Events.GuildMemberAdd, async member => {
 })
 
 client.on(Events.GuildMemberRemove, async member => {
-    console.log('left')
     OnLeave(member, client)
 })
 
