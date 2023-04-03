@@ -11,7 +11,7 @@ async function MessageHandler(message, client) {
     let command = args.shift().toLowerCase()
     let cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command))
 
-    if (!cmd) { await message.channel.send("Invalid command"); return }
+    if (!cmd) { await message.reply("Invalid command."); return }
 
     if (cmd.inVoiceChannel && !message.member.voice.channel) {
         return await message.channel.send(`${client.emotes.error} | You must be in a voice channel!`)
@@ -22,7 +22,7 @@ async function MessageHandler(message, client) {
     } catch (error) {
         console.log(error)
         console.log("Invalid command")
-        await message.channel.send("Invalid command")
+        await message.reply("Invalid command")
     }
 }
 
