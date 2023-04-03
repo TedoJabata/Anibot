@@ -12,5 +12,6 @@
     },
     "joinLeaveChannelId": "1092162519046561902",
     "mutedRoleName": "Muted",
-    "defaultRoleName": "Member"
+    "defaultRoleName": "Member",
+    "verifiedRoleName": "Verified"
 }

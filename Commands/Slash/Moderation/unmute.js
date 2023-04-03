@@ -13,9 +13,18 @@ module.exports = {
         .setDMPermission(false),
     async execute(interaction) {
         let target = interaction.options.getMember('target')
-        const role = interaction.guild.roles.cache.find(role => role.name === 'Muted')
+        const mutedRole = interaction.guild.roles.cache.find(role => role.name === 'Muted')
 
-        target.roles.remove(role)
-        await interaction.reply(`${target.user.username} was unmuted.`)
+        if (!mutedRole) {
+            await interaction.reply({
+                content: 'Muted role doesnt exist! Please create a role named "Muted".',
+                ephemeral: true
+            })
+        } else if (!target.roles.cache.some(role => role.name === 'Muted')) {
+            await interaction.reply({ content: `***${target.user.username}*** is not muted.`, ephemeral: true })
+        } else {
+            await target.roles.remove(mutedRole)
+            await interaction.reply(`***${target.user.username}*** was unmuted by ***${interaction.member.user.username}***`)
+        }
     }
 }
