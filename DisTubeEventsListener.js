@@ -8,9 +8,9 @@ async function DisTubeEventsListener(client) {
             queue.textChannel.send(`${client.emotes.success} | Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`))
         .on('searchNoResult', (message, query) => message.channel.send(`${client.emotes.error} | No result found for \`${query}\`!`))
         .on('empty', channel => channel.send('Voice channel is empty! Leaving the channel...'))
-        .on('error', (channel, e) => {
-            if (channel) channel.send(`${client.emotes.error} | An error encountered: ${e.toString().slice(0, 1974)}`)
-            else console.error(e)
+        .on('error', (channel, err) => {
+            if (channel) channel.send(`${client.emotes.error} | An error encountered: ${err.toString().slice(0, 1974)}`)
+            else console.error(err)
         })
 }
 
