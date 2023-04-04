@@ -82,7 +82,7 @@ client.on(Events.InteractionCreate, async interaction => {
 })
 
 client.on(Events.GuildMemberAdd, async member => {
-    OnJoin(member, Discord)
+    OnJoin(member)
 })
 
 client.on(Events.GuildMemberRemove, async member => {

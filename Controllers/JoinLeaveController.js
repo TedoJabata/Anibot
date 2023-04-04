@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require('discord.js')
 const config = require('../config.json')
 
-async function OnJoin(member, Discord) {
+async function OnJoin(member) {
     const role = member.guild.roles.cache.find(role => role.name === config.defaultRoleName)
 
     if (!role) {
