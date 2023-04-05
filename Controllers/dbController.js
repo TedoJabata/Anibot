@@ -39,7 +39,6 @@ async function ChoosePokemon(userId, username) {
         let foundPokemon = await PokemonSchema.findOne({ _id: pokemonId })
         return foundPokemon
     }
-
 }
 
 module.exports = { UserExists, CreateUser, CreatePokemon, ChoosePokemon }

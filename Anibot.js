@@ -36,8 +36,8 @@ client.distube = new DisTube(client, {
 })
 
 //HANDLERS, REGISTRANT & READER
-const { InteractionHandler } = require('./Handlers/InteractionHandler')
-const { MessageHandler } = require('./Handlers/MessageHandler')
+const { InteractionHandler } = require('./Handlers/UserInteractionHandler')
+const { MessageHandler } = require('./Handlers/UserMessageHandler')
 const { ReadCommands, ReadSlashCommands } = require('./CommandsReader')
 
 //JOIN & LEAVE MESSAGES
