@@ -3,15 +3,16 @@ const { Send } = require("../../Controllers/ReplyController")
 module.exports = {
     name: 'join',
     aliases: ['move'],
-    execute: async(message, args, client, isInteraction, interaction) => {
-        let vc
-        if (isInteraction) {
-            vc = interaction.member.voice.channel
+    execute: async(message, args, client, interaction) => {
+        let msgOrIntr
+        if (interaction) {
+            msgOrIntr = interaction
         } else {
-            vc = message.member.voice.channel
+            msgOrIntr = message
         }
+        let vc = msgOrIntr.member.voice.channel
         if (!vc) {
-            return await Send(isInteraction, `${client.emotes.error} | You must be in a voice channel!`, true, interaction, message)
+            return await Send(`${client.emotes.error} | You must be in a voice channel!`, true, interaction, message)
         }
         await client.distube.voices.join(vc)
     }

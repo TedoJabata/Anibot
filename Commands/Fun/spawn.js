@@ -1,10 +1,10 @@
 const GoogleImages = require('google-images')
-const client = new GoogleImages(process.env.SEARCH_MACHINE_ID, process.env.GOOGLE_API_KEY);
+const gClient = new GoogleImages(process.env.SEARCH_MACHINE_ID, process.env.GOOGLE_API_KEY);
 require("dotenv/config")
 require("../../global")
 module.exports = {
     name: 'spawn',
-    execute: async(message, args, dClient, isInteraction, interaction) => {
+    execute: async(message, args, client, interaction) => {
         fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
             .then(async(response) => await response.json())
             .then(async(data) => {
@@ -18,12 +18,12 @@ module.exports = {
                 pokeattack = attack
 
                 //FOR IMAGE RESULT
-                //let search = fixedName + ' pokemon'
-                // client.search(search)
+                //let query = fixedName + ' pokemon'
+                // gClient.search(query)
                 //     .then(images => {
                 //         images = images.filter(img => !img.url.endsWith('.svg'));
                 //         let image = images[Math.floor(Math.random() * images.length)].url
-                //         if (isInteraction) {
+                //         if (interaction) {
                 //             interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}*** \n${image}`)
                 //         } else {
                 //             message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}*** \n${image}`)
@@ -31,7 +31,7 @@ module.exports = {
                 //     })
 
                 //NO IMAGE
-                if (isInteraction) {
+                if (interaction) {
                     await interaction.reply(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`)
                 } else {
                     await message.channel.send(`***A pokemon appeared!***\nName: ***${fixedName}***\nAttack: ***${attack}***`)

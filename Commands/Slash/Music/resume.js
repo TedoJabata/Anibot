@@ -7,6 +7,6 @@ module.exports = {
     async execute(interaction, client) {
         let cmd = require(`../../Music/resume`)
         cmd = await client.commands.get('resume')
-        await cmd.execute(null, null, client, true, interaction)
+        await cmd.execute(null, null, client, interaction)
     },
 }

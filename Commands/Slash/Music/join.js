@@ -8,6 +8,6 @@ module.exports = {
         let cmd = require(`../../Music/join`)
         cmd = await client.commands.get('join')
         await interaction.reply('Joining...')
-        await cmd.execute(null, null, client, true, interaction)
+        await cmd.execute(null, null, client, interaction)
     },
 }

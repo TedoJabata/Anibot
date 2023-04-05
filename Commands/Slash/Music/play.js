@@ -13,6 +13,6 @@ module.exports = {
 
         let cmd = require(`../../Music/play`)
         cmd = await client.commands.get('play')
-        await cmd.execute(null, arg, client, true, interaction)
+        await cmd.execute(null, arg, client, interaction)
     },
 }

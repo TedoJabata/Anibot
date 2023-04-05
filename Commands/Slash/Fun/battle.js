@@ -15,6 +15,6 @@ module.exports = {
         if (!reset) {
             reset = ''
         }
-        await cmd.execute(null, reset, client, true, interaction)
+        await cmd.execute(null, reset, client, interaction)
     },
 }

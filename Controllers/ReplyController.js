@@ -1,5 +1,5 @@
-async function Send(isInteraction, text, reply, interaction, message) {
-    if (isInteraction) {
+async function Send(text, reply, interaction, message) {
+    if (interaction) {
         await interaction.reply(text)
     } else {
         if (reply) {
