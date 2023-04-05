@@ -12,13 +12,14 @@ const client = new Discord.Client({
 })
 
 //DISTUBE
+require('discord-player/smoothVolume');
+
 const { DisTube } = require('distube')
 const { SpotifyPlugin } = require('@distube/spotify')
 const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 const { DisTubeEventsListener } = require('./DisTubeEventsListener')
-require('discord-player/smoothVolume');
 
 client.distube = new DisTube(client, {
     leaveOnStop: false,
