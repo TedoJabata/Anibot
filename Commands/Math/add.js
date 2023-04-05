@@ -11,7 +11,7 @@ module.exports = {
 
         if (String(sum) === 'NaN') {
             await message.channel.send(`<@${message.member.id}> give me valid numbers!`)
-        } else if (args[0] == '9' && args[1] == '10' && sum == 19) {
+        } else if (args.length == 2 && args[0] == '9' && args[1] == '10' && sum == 19) {
             await message.channel.send(`<@${message.member.id}> The sum is ***21***`)
         } else {
             await message.channel.send(`<@${message.member.id}> The sum is ***${String(sum)}***`)
