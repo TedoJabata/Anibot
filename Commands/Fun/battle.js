@@ -32,7 +32,7 @@ module.exports = {
             battleReset = true
             await Send(`Resetting the battle...`, true, interaction, message)
         } else {
-            let pokemon = await ChoosePokemon(msgOrIntr.member.id, msgOrIntr.member.username)
+            let pokemon = await ChoosePokemon(msgOrIntr.member.id, msgOrIntr.member.user.username)
             if (!pokemon) {
                 await Send(`You have no pokemons to use for a battle.`, true, interaction, message)
             } else {

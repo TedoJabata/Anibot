@@ -21,6 +21,14 @@ module.exports = {
             }
         })
 
+        if (result % 1 != 0) {
+            if (result < 0.01) {
+                result = 0
+            } else {
+                result.toFixed(2)
+            }
+        }
+
         if (!validNumbers) {
             await message.channel.send(`<@${message.member.id}> give me valid numbers!`)
         } else {

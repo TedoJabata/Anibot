@@ -1,18 +1,23 @@
 module.exports = {
-    name: 'add',
+    name: 'multiply',
     execute: async(message, args) => {
         if (args.length < 1) {
             await message.channel.send(`<@${message.member.id}> give me some numbers!`)
             return
         }
 
-        let sum = 0;
+        let result = null
         let validNumbers = false
 
         args.forEach(element => {
+
             if (Number(element)) {
-                validNumbers = true
-                sum += Number(element)
+                if (result == null) {
+                    result = Number(element)
+                    validNumbers = true
+                } else {
+                    result *= Number(element)
+                }
             }
         })
 
@@ -27,7 +32,7 @@ module.exports = {
         if (!validNumbers) {
             await message.channel.send(`<@${message.member.id}> give me valid numbers!`)
         } else {
-            await message.channel.send(`<@${message.member.id}> The sum is ***${String(sum)}***`)
+            await message.channel.send(`<@${message.member.id}> The result is ***${String(result)}***`)
         }
     }
 }

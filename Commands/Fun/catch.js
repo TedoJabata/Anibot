@@ -17,8 +17,8 @@ module.exports = {
         }
 
         let userExists = await UserExists(msgOrIntr.member.id)
-        if (!userExists) { await CreateUser(msgOrIntr.member.id, msgOrIntr.member.username) }
-        await CreatePokemon(pokename, pokeattack, msgOrIntr.member.id, msgOrIntr.member.username)
+        if (!userExists) { await CreateUser(msgOrIntr.member.id, msgOrIntr.member.user.username) }
+        await CreatePokemon(pokename, pokeattack, msgOrIntr.member.id, msgOrIntr.member.user.username)
 
         if (interaction) {
             await interaction.reply(`You got ***${pokename}*** with ***${pokeattack}*** power!`)
