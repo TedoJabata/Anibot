@@ -5,7 +5,7 @@ async function MessageHandler(message, client) {
 
     const prefix = config.prefix
 
-    if (message.content.split(' ')[0] != prefix) return
+    if (message.content.split(' ')[0].toLowerCase() != prefix) return
 
     let args = message.content.slice(prefix.length).trim().split(/ +/g)
     let command = args.shift().toLowerCase()
@@ -22,7 +22,7 @@ async function MessageHandler(message, client) {
     } catch (error) {
         console.log(error)
         console.log("Invalid command")
-        await message.reply("Invalid command")
+        await message.reply("Invalid command.")
     }
 }
 
