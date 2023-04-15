@@ -8,5 +8,5 @@ module.exports = {
         let cmd = require(`../../Music/skip`)
         cmd = await client.commands.get('skip')
         await cmd.execute(null, null, client, interaction)
-    },
+    }
 }

@@ -8,5 +8,5 @@ module.exports = {
         let cmd = require(`../../Fun/spawn`)
         cmd = await client.commands.get('spawn')
         await cmd.execute(null, null, client, interaction)
-    },
+    }
 }

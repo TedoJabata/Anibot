@@ -6,5 +6,5 @@ module.exports = {
         .setDescription('Gives info.'),
     async execute(interaction) {
         await interaction.reply('insert info here')
-    },
+    }
 }

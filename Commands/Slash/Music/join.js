@@ -9,5 +9,5 @@ module.exports = {
         cmd = await client.commands.get('join')
         await interaction.reply('Joining...')
         await cmd.execute(null, null, client, interaction)
-    },
+    }
 }

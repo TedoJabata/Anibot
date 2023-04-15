@@ -9,5 +9,5 @@ module.exports = {
     async execute(interaction) {
         await RegisterSlashCommands(['Music', 'Fun', 'Math', 'Moderation'])
         await interaction.reply(`Reloaded all slash commands!`)
-    },
+    }
 }

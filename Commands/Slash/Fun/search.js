@@ -19,5 +19,5 @@ module.exports = {
                 images = images.filter(img => !img.url.endsWith('.svg'));
                 await interaction.reply(`${images[Math.floor(Math.random() * images.length)].url}`)
             })
-    },
+    }
 }

@@ -16,5 +16,5 @@ module.exports = {
         const num1 = interaction.options.getNumber('number1')
         const num2 = interaction.options.getNumber('number2')
         await interaction.reply(`The result is: ***${String(num1 + num2)}***`)
-    },
+    }
 }

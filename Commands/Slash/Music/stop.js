@@ -8,5 +8,5 @@ module.exports = {
         let cmd = require(`../../Music/stop`)
         cmd = await client.commands.get('stop')
         await cmd.execute(null, null, client, interaction)
-    },
+    }
 }

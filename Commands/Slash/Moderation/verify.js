@@ -29,5 +29,5 @@ module.exports = {
             await interaction.reply({ content: "You have been verified!", ephemeral: true })
             await interaction.member.send({ embeds: [embed] })
         }
-    },
+    }
 }

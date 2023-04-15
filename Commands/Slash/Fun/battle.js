@@ -16,5 +16,5 @@ module.exports = {
             reset = ''
         }
         await cmd.execute(null, reset, client, interaction)
-    },
+    }
 }

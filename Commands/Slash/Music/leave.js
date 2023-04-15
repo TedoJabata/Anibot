@@ -7,5 +7,5 @@ module.exports = {
     async execute(interaction, client) {
         await interaction.reply('Leaving...')
         await client.distube.voices.leave(interaction)
-    },
+    }
 }

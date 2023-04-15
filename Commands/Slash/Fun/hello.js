@@ -6,5 +6,5 @@ module.exports = {
         .setDescription('Says hello :)'),
     async execute(interaction) {
         await interaction.reply(`Hello <@${interaction.user.id}>!`)
-    },
+    }
 }

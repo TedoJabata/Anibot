@@ -8,5 +8,5 @@ module.exports = {
         let cmd = require(`../../Fun/catch`)
         cmd = await client.commands.get('catch')
         await cmd.execute(null, null, client, interaction)
-    },
+    }
 }
