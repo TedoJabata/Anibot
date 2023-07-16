@@ -9,9 +9,5 @@
         "error": "❌",
         "sad": "😥",
         "smile": "🙂"
-    },
-    "joinLeaveChannelId": "1092162519046561902",
-    "mutedRoleName": "Muted",
-    "defaultRoleName": "Member",
-    "verifiedRoleName": "Verified"
+    }
 }
