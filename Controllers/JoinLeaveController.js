@@ -1,11 +1,13 @@
 const { EmbedBuilder } = require('discord.js')
 const config = require('../config.json')
+const ServerSchema = require("../Models/ServerModel")
 
 async function OnJoin(member) {
-    const role = member.guild.roles.cache.find(role => role.name === config.defaultRoleName)
+    const foundServer = await ServerSchema.findOne({ serverId: member.guild.id })
+    const role = member.guild.roles.cache.find(role => role.name === foundServer.memberRoleName)
 
     if (!role) {
-        await (await member.guild.fetchOwner()).send(`Member role not set in ${member.guild.name}. Please create a role named "Muted" to enable auto member role.`)
+        await (await member.guild.fetchOwner()).send(`Member role not set in ${member.guild.name}. Please set up default role to enable auto member role.`)
     } else {
         await member.roles.add(role)
     }
@@ -21,7 +23,7 @@ async function OnJoin(member) {
         .setThumbnail(member.user.avatarURL())
         .setTimestamp()
 
-    let channel = member.guild.channels.cache.get(config.joinLeaveChannelId)
+    let channel = member.guild.channels.cache.get(foundServer.joinLeaveChannelId)
     if (!channel) {
         await (await member.guild.fetchOwner()).send(`Join/Leave channel not set in ${member.guild.name}. Please set up the Join/Leave channel ID.`)
     } else {

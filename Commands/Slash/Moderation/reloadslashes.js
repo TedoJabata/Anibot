@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Reloads all slash commands.')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
-        await RegisterSlashCommands(['Music', 'Fun', 'Math', 'Moderation'])
+        await RegisterSlashCommands(['Music', 'Fun', 'Math', 'Moderation'], interaction.guild.id)
         await interaction.reply(`Reloaded all slash commands!`)
     }
 }

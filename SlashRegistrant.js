@@ -2,7 +2,7 @@ const { REST, Routes } = require('discord.js')
 const fs = require('node:fs')
 require("dotenv/config")
 
-async function RegisterSlashCommands(paths) {
+async function RegisterSlashCommands(paths, gId) {
     const slashCommands = []
 
     for (let i = 0; i < paths.length; i++) {
@@ -15,7 +15,7 @@ async function RegisterSlashCommands(paths) {
     const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
     (async() => {
-        let guildId = '1004132716335333376'
+        let guildId = gId
         try {
             console.log(`Started refreshing ${slashCommands.length} application (/) commands.`)
 

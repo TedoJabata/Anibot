@@ -1,5 +1,6 @@
 const UserSchema = require("../Models/UserModel")
 const PokemonSchema = require("../Models/PokemonModel")
+const ServerSchema = require("../Models/ServerModel")
 
 async function UserExists(userId) {
     let foundUser = await UserSchema.findOne({ discordId: userId })
@@ -41,4 +42,37 @@ async function ChoosePokemon(userId, username) {
     }
 }
 
-module.exports = { UserExists, CreateUser, CreatePokemon, ChoosePokemon }
+async function Set(sName, serId, joinLeave, muted, member, verified) {
+    let foundServer = await ServerSchema.findOne({ serverId: serId })
+    if (!foundServer) {
+        await CreateServer(sName, serId, joinLeave, muted, member, verified)
+        foundServer = await ServerSchema.findOne({ serverId: serId })
+    } else {
+        if (sName) {
+            foundServer.name = sName
+        }
+        if (serId) {
+            foundServer.serverId = serId
+        }
+        if (joinLeave) {
+            foundServer.joinLeaveChannelId = joinLeave
+        }
+        if (muted) {
+            foundServer.mutedRoleName = muted
+        }
+        if (member) {
+            foundServer.memberRoleName = member
+        }
+        if (verified) {
+            foundServer.verifiedRoleName = verified
+        }
+        await foundServer.save()
+    }
+}
+
+async function CreateServer(sName, serId, joinLeave, muted, member, verified) {
+    const server = new ServerSchema({ name: sName, serverId: serId, joinLeaveChannelId: joinLeave, mutedRoleName: muted, memberRoleName: member, verifiedRoleName: verified })
+    await server.save()
+}
+
+module.exports = { UserExists, CreateUser, CreatePokemon, ChoosePokemon, Set }

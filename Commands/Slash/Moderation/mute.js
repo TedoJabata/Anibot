@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 const config = require('../../../config.json')
+const ServerSchema = require("../../../Models/ServerModel")
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -20,16 +21,17 @@ module.exports = {
         let target = interaction.options.getMember('target')
         let reason = interaction.options.getString('reason')
 
-        const role = interaction.guild.roles.cache.find(role => role.name === config.mutedRoleName)
+        const foundServer = await ServerSchema.findOne({ serverId: interaction.guild.id })
+        const role = interaction.guild.roles.cache.find(role => role.name === foundServer.mutedRoleName)
 
         if (!reason) reason = 'No provided reason'
 
         if (!role) {
             await interaction.reply({
-                content: 'Muted role doesnt exist! Please create a role named "Muted".',
+                content: 'Muted role doesnt exist! Please set up a muted role.',
                 ephemeral: true
             })
-        } else if (target.roles.cache.some(role => role.name === 'Muted')) {
+        } else if (target.roles.cache.some(role => role.name === foundServer.mutedRoleName)) {
             await interaction.reply({ content: `***${target.user.username}*** is already muted.`, ephemeral: true })
         } else {
             await target.roles.add(role)
