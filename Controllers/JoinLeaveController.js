@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require('discord.js')
-const config = require('../config.json')
 const ServerSchema = require("../Models/ServerModel")
 
 async function OnJoin(member) {
@@ -32,7 +31,8 @@ async function OnJoin(member) {
 }
 
 async function OnLeave(member, client) {
-    let channel = client.channels.cache.get(config.joinLeaveChannelId)
+    const foundServer = await ServerSchema.findOne({ serverId: member.guild.id })
+    let channel = client.channels.cache.get(foundServer.joinLeaveChannelId)
     if (!channel) {
         await (await member.guild.fetchOwner()).send(`Join/Leave channel not set in ${member.guild.name}. Please set up the Join/Leave channel ID.`)
     } else {

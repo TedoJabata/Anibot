@@ -48,12 +48,7 @@ async function Set(sName, serId, joinLeave, muted, member, verified) {
         await CreateServer(sName, serId, joinLeave, muted, member, verified)
         foundServer = await ServerSchema.findOne({ serverId: serId })
     } else {
-        if (sName) {
-            foundServer.name = sName
-        }
-        if (serId) {
-            foundServer.serverId = serId
-        }
+        foundServer.name = sName
         if (joinLeave) {
             foundServer.joinLeaveChannelId = joinLeave
         }
