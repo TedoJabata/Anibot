@@ -12,7 +12,7 @@ const client = new Discord.Client({
 })
 
 //DISTUBE
-require('discord-player/smoothVolume');
+require('discord-player');
 
 const { DisTube } = require('distube')
 const { SpotifyPlugin } = require('@distube/spotify')
@@ -48,7 +48,6 @@ const { OnJoin, OnLeave } = require('./Controllers/JoinLeaveController')
 const config = require('./config.json')
 client.config = require('./config.json')
 require('dotenv/config')
-require('discord-player/smoothVolume')
 
 //COMANDS, SLASHES & EMOTES
 client.commands = new Discord.Collection()

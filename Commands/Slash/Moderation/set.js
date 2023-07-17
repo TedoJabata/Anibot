@@ -25,15 +25,11 @@ module.exports = {
         .setDMPermission(false),
     async execute(interaction) {
         let joinleave = interaction.options.getChannel('join_leave_channel')
-
         let muted = interaction.options.getRole('muted_role')
-
         let member = interaction.options.getRole('member_role')
-
         let verified = interaction.options.getRole('verified_role')
 
         await Set(interaction.guild.name, interaction.guild.id, joinleave.id, muted, member, verified)
-
         await interaction.reply({ content: `Config was updated for this server!`, ephemeral: true })
     }
 }

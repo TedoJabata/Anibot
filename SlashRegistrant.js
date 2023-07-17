@@ -19,7 +19,7 @@ async function RegisterSlashCommands(paths, gId) {
         try {
             console.log(`Started refreshing ${slashCommands.length} application (/) commands.`)
 
-            // DELETE ALL
+            // DELETE SERVER
             // await rest.put(Routes.applicationGuildCommands(process.env.APP_ID, guildId), { body: [] })
             //     .then(() => console.log('Successfully deleted all guild commands.'))
             //     .catch(console.error)
@@ -32,6 +32,11 @@ async function RegisterSlashCommands(paths, gId) {
             // GLOBAL -->
             // const data = await rest.put(
             //     Routes.applicationCommands(process.env.APP_ID), { body: slashCommands }
+            // )
+
+            // DELETE GLOBAL -->
+            // const data = await rest.put(
+            //     Routes.applicationCommands(process.env.APP_ID), { body: [] }
             // )
 
             // DELETE ONE

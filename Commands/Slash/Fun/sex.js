@@ -13,6 +13,6 @@ module.exports = {
     async execute(interaction) {
         let partner = interaction.options.getMember('partner')
 
-        await interaction.reply(`<@${interaction.user.id}> is having sex with <@${partner.user.id} and is close to cumming AHHHHH~~~`)
+        await interaction.reply(`<@${interaction.user.id}> is having sex with <@${partner.user.id}> and is close to cumming AHHHHH~~~`)
     }
 }
