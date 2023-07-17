@@ -29,7 +29,7 @@ module.exports = {
         let member = interaction.options.getRole('member_role')
         let verified = interaction.options.getRole('verified_role')
 
-        await Set(interaction.guild.name, interaction.guild.id, joinleave.id, muted, member, verified)
+        await Set(interaction.guild.name, interaction.guild.id, joinleave, muted, member, verified)
         await interaction.reply({ content: `Config was updated for this server!`, ephemeral: true })
     }
 }

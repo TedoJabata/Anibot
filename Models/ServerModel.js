@@ -11,4 +11,4 @@ const Server = new Schema({
 });
 
 mongoose.model('Server', Server)
-module.exports = mongoose.model('Server', Server, "serverConfigs")
+module.exports = mongoose.model('Server', Server, "servers")

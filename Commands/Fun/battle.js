@@ -30,7 +30,7 @@ module.exports = {
         if ((args[0] == 'reset' || args[0] == 'r' || args == 'reset') && hasPremission) {
             Player1.id = ''
             battleReset = true
-            await Send(`Resetting the battle...`, true, interaction, message)
+            await Send(`Restarting the battle...`, true, interaction, message)
         } else {
             let pokemon = await ChoosePokemon(msgOrIntr.member.id, msgOrIntr.member.user.username)
             if (!pokemon) {

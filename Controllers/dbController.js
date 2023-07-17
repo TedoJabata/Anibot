@@ -47,22 +47,21 @@ async function Set(sName, serId, joinLeave, muted, member, verified) {
     if (!foundServer) {
         await CreateServer(sName, serId, joinLeave, muted, member, verified)
         foundServer = await ServerSchema.findOne({ serverId: serId })
-    } else {
-        foundServer.name = sName
-        if (joinLeave) {
-            foundServer.joinLeaveChannelId = joinLeave
-        }
-        if (muted) {
-            foundServer.mutedRoleName = muted
-        }
-        if (member) {
-            foundServer.memberRoleName = member
-        }
-        if (verified) {
-            foundServer.verifiedRoleName = verified
-        }
-        await foundServer.save()
     }
+    foundServer.name = sName
+    if (joinLeave) {
+        foundServer.joinLeaveChannelId = joinLeave.id
+    }
+    if (muted) {
+        foundServer.mutedRoleName = muted.name
+    }
+    if (member) {
+        foundServer.memberRoleName = member.name
+    }
+    if (verified) {
+        foundServer.verifiedRoleName = verified.name
+    }
+    await foundServer.save()
 }
 
 async function CreateServer(sName, serId, joinLeave, muted, member, verified) {
