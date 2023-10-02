@@ -56,6 +56,7 @@ client.slashCommands = new Discord.Collection()
 client.emotes = config.emoji
 
 //DATABASE
+/*
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO, { useNewUrlParser: true })
 
@@ -63,6 +64,7 @@ const db = mongoose.connection
 db.once("open", function() {
     console.log('Database connected')
 })
+*/
 
 //REGISTER ALL COMMANDS
 ReadCommands(['Music', 'Fun', 'Math', 'Moderation'], client)
