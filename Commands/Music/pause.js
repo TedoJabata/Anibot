@@ -13,7 +13,7 @@ module.exports = {
         }
 
         let queue = await client.distube.getQueue(msgOrIntr)
-        queue.textChannel = msgOrIntr.channel
+        //queue.textChannel = msgOrIntr.channel // Do i need that??
 
         if (!queue) return await Send(`${client.emotes.error} | There is nothing in the queue right now!`, true, interaction, message)
         if (queue.paused) {
