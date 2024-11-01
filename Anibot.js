@@ -38,7 +38,7 @@ const { MessageHandler } = require('./Handlers/MessageHandler')
 const { ReadCommands, ReadSlashCommands } = require('./CommandsReader')
 
 //JOIN & LEAVE MESSAGES
-const { OnJoin, OnLeave } = require('./Controllers/JoinLeaveController')
+//const { OnJoin, OnLeave } = require('./Controllers/JoinLeaveController')
 
 //CONFIGS
 const config = require('./config.json')
@@ -79,13 +79,13 @@ client.on(Events.InteractionCreate, async interaction => {
     InteractionHandler(interaction, client)
 })
 
-client.on(Events.GuildMemberAdd, async member => {
-    OnJoin(member)
-})
+//client.on(Events.GuildMemberAdd, async member => {
+ //   OnJoin(member)
+//})
 
-client.on(Events.GuildMemberRemove, async member => {
-    OnLeave(member, client)
-})
+//client.on(Events.GuildMemberRemove, async member => {
+//    OnLeave(member, client)
+//})
 
 DisTubeEventsListener(client)
 

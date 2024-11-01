@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   anibot:
-    image: anibot
+    image: discord_bots
     build:
       context: .
       dockerfile: ./Dockerfile
