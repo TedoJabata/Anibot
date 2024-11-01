@@ -17,7 +17,7 @@ module.exports = {
 
         if (!queue) return await Send(`${client.emotes.error} | There is nothing in the queue right now!`, true, interaction, message)
 
-        await queue.stop()
+        await queue.pause()
         await Send(`${client.emotes.success} | Stopped!`, true, interaction, message)
     }
 }
