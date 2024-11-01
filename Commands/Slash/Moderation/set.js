@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
-const { Set } = require("../../../Controllers/DBController")
+//const { Set } = require("../../../Controllers/DBController")
 
 module.exports = {
     data: new SlashCommandBuilder()
