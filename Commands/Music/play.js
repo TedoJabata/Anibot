@@ -16,7 +16,7 @@ module.exports = {
             searchString = args.join(' ')
         }
 
-        if (!searchString) return await Send(`${client.emotes.error} | Please enter a song url or query to search.`, true, interaction, message)
+        if (!searchString) return await Send(`${client.emotes.error} | Please enter a song url or query to search. (Youtube links are only 30 seconds!)`, true, interaction, message)
         await client.distube.play(msgOrIntr.member.voice.channel, searchString, {
             member: msgOrIntr.member,
             textChannel: msgOrIntr.channel,

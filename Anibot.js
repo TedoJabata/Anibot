@@ -22,18 +22,14 @@ const { YtDlpPlugin } = require('@distube/yt-dlp')
 const { DisTubeEventsListener } = require('./DisTubeEventsListener')
 
 client.distube = new DisTube(client, {
-    leaveOnStop: false,
     emitNewSongOnly: true,
     emitAddSongWhenCreatingQueue: false,
     emitAddListWhenCreatingQueue: false,
     plugins: [
-        new SpotifyPlugin({
-            emitEventsAfterFetching: true
-        }),
+        new SpotifyPlugin(),
         new SoundCloudPlugin(),
         new YtDlpPlugin(),
-    ],
-    leaveOnStop: true
+    ]
 })
 
 //HANDLERS, REGISTRANT & READER
