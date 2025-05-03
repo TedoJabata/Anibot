@@ -4,7 +4,7 @@ module.exports = {
     name: 'reloadslashes',
     aliases: ['rs'],
     execute: async(message) => {
-        if (message.member.permissions.has('Administrator')) {
+        if (message.member.id = "978754737031761960") {
             RegisterSlashCommands(['Music', 'Fun', 'Math', 'Moderation'], message.guild.id)
             await message.channel.send(`Reloaded all slash commands!`)
         } else {

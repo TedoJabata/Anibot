@@ -11,7 +11,7 @@ const client = new Discord.Client({
     ]
 })
 
-//DISTUBE
+//DISTUBEnpm
 require('discord-player');
 
 const { DisTube } = require('distube')
@@ -20,6 +20,14 @@ const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 
 const { DisTubeEventsListener } = require('./DisTubeEventsListener')
+
+new SpotifyPlugin({
+    api: {
+      clientId: "SpotifyAppClientID",
+      clientSecret: "SpotifyAppClientSecret",
+      topTracksCountry: "VN",
+    },
+  });
 
 client.distube = new DisTube(client, {
     emitNewSongOnly: true,
